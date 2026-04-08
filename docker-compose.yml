@@ -1,0 +1,133 @@
+
+services:
+
+  # ── PostgreSQL 16 ───────────────────────────────────────────────────────────
+  db:
+    image: postgres:16
+    container_name: immomaroc_db
+    restart: always
+    environment:
+      POSTGRES_DB:       immomaroc
+      POSTGRES_USER:     ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - immomaroc_net
+    # Backend waits for this healthcheck before starting
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d immomaroc"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    # Never expose PostgreSQL port publicly — internal network only
+    expose:
+      - "5432"
+
+  # ── Spring Boot API ─────────────────────────────────────────────────────────
+  backend:
+    image: pulga1606/backend:latest
+    build:
+      context: ./mmo-maroc-back
+      dockerfile: Dockerfile
+    container_name: immomaroc_backend
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy   # wait for Postgres to be ready
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+
+      # Database — points to the 'db' service (not localhost)
+      DB_URL:      jdbc:postgresql://db:5432/immomaroc
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+      # JWT
+      JWT_SECRET:       ${JWT_SECRET}
+      JWT_EXPIRATION_MS: 86400000
+
+      # Mail
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+
+      # Uploads — absolute path inside the container (matches volume mount)
+      UPLOAD_DIR: /var/immomaroc/uploads/
+
+      # CORS — must match your real domain in production
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+
+      # Admin
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+
+      # Cookies must be Secure=true when served over HTTPS
+      COOKIE_SECURE: ${COOKIE_SECURE}
+
+      # Override prod profile's validate — create missing tables on first boot
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+      # Optional: translation rate limit email
+      MYMEMORY_EMAIL: ${MAIL_USERNAME}
+
+    volumes:
+      # Uploaded images — shared with frontend (Nginx serves them directly)
+      - uploads_data:/var/immomaroc/uploads/
+      # Application logs — persisted outside the container
+      - logs_data:/app/logs
+
+    # Never expose port 8090 publicly — only Nginx can reach it
+    expose:
+      - "8090"
+
+    networks:
+      - immomaroc_net
+
+    # Healthcheck uses the public /api/properties endpoint (no auth required)
+    # Spring Boot takes ~60 seconds to start — start_period gives it room
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8090/api/properties?size=1&page=0"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  # ── Nginx + React SPA ───────────────────────────────────────────────────────
+  frontend:
+    image: pulga1606/frontend:latest
+    build:
+      context: ./immo-maroc
+      dockerfile: Dockerfile
+    container_name: immomaroc_frontend
+    restart: always
+    depends_on:
+      - backend   # start after backend (nginx will 502 gracefully until it's up)
+    ports:
+      # Only this container is exposed to the internet
+      - "${FRONTEND_PORT}:80"
+    volumes:
+      # Read-only access to uploads — Nginx serves images directly (no JVM hop)
+      - uploads_data:/var/immomaroc/uploads/:ro
+    networks:
+      - immomaroc_net
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Named volumes — data persists across container rebuilds and restarts
+# ══════════════════════════════════════════════════════════════════════════════
+volumes:
+  postgres_data:
+    driver: local
+
+  uploads_data:
+    driver: local
+
+  logs_data:
+    driver: local
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Internal network — containers talk to each other, nothing is exposed
+# except port 80 on the frontend container
+# ══════════════════════════════════════════════════════════════════════════════
+networks:
+  immomaroc_net:
+    driver: bridge
