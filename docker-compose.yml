@@ -37,7 +37,7 @@ services:
       db:
         condition: service_healthy   # wait for Postgres to be ready
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: prod
 
       # Database — points to the 'db' service (not localhost)
       DB_URL:      jdbc:postgresql://db:5432/immomaroc
