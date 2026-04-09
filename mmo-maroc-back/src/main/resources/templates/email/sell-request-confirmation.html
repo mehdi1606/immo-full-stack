@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demande reçue – ImmoMaroc</title>
+</head>
+<body style="margin:0;padding:0;background-color:#F0EDE8;font-family:'Segoe UI',Arial,sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F0EDE8;padding:32px 0;">
+    <tr>
+      <td align="center">
+        <table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#1A2340 0%,#243058 100%);border-radius:12px 12px 0 0;padding:36px 40px;text-align:center;">
+              <div style="font-size:28px;font-weight:800;color:#C8973A;letter-spacing:2px;text-transform:uppercase;">IMMO<span style="color:#FFFFFF;">MAROC</span></div>
+              <div style="font-size:12px;color:#A0A8BF;margin-top:4px;letter-spacing:3px;text-transform:uppercase;">Immobilier de Prestige au Maroc</div>
+            </td>
+          </tr>
+
+          <!-- Success banner -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#2E7D5E,#3A9970);padding:14px 40px;text-align:center;">
+              <span style="font-size:14px;font-weight:700;color:#FFFFFF;letter-spacing:1px;text-transform:uppercase;">
+                &#10003; Demande reçue avec succès
+              </span>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="background-color:#FFFFFF;padding:40px 40px 32px 40px;">
+
+              <!-- Greeting -->
+              <p style="margin:0 0 6px 0;font-size:22px;color:#1A2340;font-weight:700;">Bonjour {{CLIENT_NAME}},</p>
+              <p style="margin:0 0 28px 0;font-size:15px;color:#555;line-height:1.7;">
+                Nous avons bien reçu votre demande et nous vous remercions de votre confiance.<br/>
+                Notre équipe d'experts analysera votre dossier et vous contactera dans les <strong style="color:#C8973A;">48 heures</strong>.
+              </p>
+
+              <!-- Summary card -->
+              <div style="font-size:12px;color:#C8973A;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Récapitulatif de votre demande</div>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-radius:8px;overflow:hidden;border:1px solid #E8E4DC;margin-bottom:28px;">
+                <tr style="background-color:#F8F6F2;">
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;width:40%;border-bottom:1px solid #E8E4DC;">&#127968; Type de bien</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;">{{PROPERTY_TYPE}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;border-bottom:1px solid #E8E4DC;">&#128205; Ville</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;">{{CITY}}</td>
+                </tr>
+                <tr style="background-color:#F8F6F2;">
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;border-bottom:1px solid #E8E4DC;">&#127970; Objectif</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;">{{PURPOSE}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;">&#128176; Prix estimé</td>
+                  <td style="padding:13px 18px;font-size:14px;color:#C8973A;font-weight:700;">{{PRICE}} MAD</td>
+                </tr>
+              </table>
+
+              <!-- What's next -->
+              <div style="font-size:12px;color:#C8973A;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Prochaines étapes</div>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;padding:0 12px 16px 0;width:33%;">
+                    <div style="background:#F8F6F2;border-radius:8px;padding:18px;text-align:center;">
+                      <div style="font-size:24px;margin-bottom:8px;">&#128222;</div>
+                      <div style="font-size:12px;font-weight:700;color:#1A2340;margin-bottom:4px;">Contact</div>
+                      <div style="font-size:11px;color:#888;line-height:1.5;">Un conseiller vous appellera sous 48h</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align:top;padding:0 6px 16px 6px;width:33%;">
+                    <div style="background:#F8F6F2;border-radius:8px;padding:18px;text-align:center;">
+                      <div style="font-size:24px;margin-bottom:8px;">&#128203;</div>
+                      <div style="font-size:12px;font-weight:700;color:#1A2340;margin-bottom:4px;">Évaluation</div>
+                      <div style="font-size:11px;color:#888;line-height:1.5;">Analyse de votre bien par nos experts</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align:top;padding:0 0 16px 12px;width:33%;">
+                    <div style="background:#F8F6F2;border-radius:8px;padding:18px;text-align:center;">
+                      <div style="font-size:24px;margin-bottom:8px;">&#127942;</div>
+                      <div style="font-size:12px;font-weight:700;color:#1A2340;margin-bottom:4px;">Mise en ligne</div>
+                      <div style="font-size:11px;color:#888;line-height:1.5;">Publication et diffusion de votre annonce</div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:20px 0 0 0;font-size:14px;color:#555;line-height:1.6;">
+                Pour toute question, n'hésitez pas à nous contacter.<br/>
+                <strong style="color:#1A2340;">L'équipe ImmoMaroc</strong>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#1A2340;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;">
+              <div style="font-size:13px;font-weight:700;color:#C8973A;margin-bottom:6px;">IMMOMAROC</div>
+              <div style="font-size:11px;color:#6B7494;line-height:1.6;">
+                Cet email de confirmation a été envoyé automatiquement.<br/>
+                © {{YEAR}} ImmoMaroc — Tous droits réservés.
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

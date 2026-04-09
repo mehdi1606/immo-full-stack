@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nouveau Contact</title>
+</head>
+<body style="margin:0;padding:0;background-color:#F0EDE8;font-family:'Segoe UI',Arial,sans-serif;">
+
+  <!-- Wrapper -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F0EDE8;padding:32px 0;">
+    <tr>
+      <td align="center">
+        <table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#1A2340 0%,#243058 100%);border-radius:12px 12px 0 0;padding:36px 40px;text-align:center;">
+              <div style="font-size:28px;font-weight:800;color:#C8973A;letter-spacing:2px;text-transform:uppercase;">IMMO<span style="color:#FFFFFF;">MAROC</span></div>
+              <div style="font-size:12px;color:#A0A8BF;margin-top:4px;letter-spacing:3px;text-transform:uppercase;">Immobilier de Prestige au Maroc</div>
+            </td>
+          </tr>
+
+          <!-- Alert banner -->
+          <tr>
+            <td style="background-color:#C8973A;padding:14px 40px;text-align:center;">
+              <span style="font-size:14px;font-weight:700;color:#FFFFFF;letter-spacing:1px;text-transform:uppercase;">
+                &#128276; Nouveau Contact Reçu
+              </span>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="background-color:#FFFFFF;padding:40px 40px 32px 40px;">
+
+              <p style="margin:0 0 8px 0;font-size:16px;color:#1A2340;font-weight:600;">Bonjour,</p>
+              <p style="margin:0 0 28px 0;font-size:15px;color:#555;line-height:1.6;">
+                Un client potentiel a envoyé un message concernant votre bien. Voici les détails du contact :
+              </p>
+
+              <!-- Property badge -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F8F6F2;border-left:4px solid #C8973A;border-radius:0 8px 8px 0;margin-bottom:28px;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <div style="font-size:11px;color:#C8973A;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Bien concerné</div>
+                    <div style="font-size:17px;color:#1A2340;font-weight:700;">{{PROPERTY_TITLE}}</div>
+                    <div style="font-size:13px;color:#777;margin-top:3px;">&#128205; {{PROPERTY_CITY}}</div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Client info table -->
+              <div style="font-size:12px;color:#C8973A;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Informations du client</div>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-radius:8px;overflow:hidden;border:1px solid #E8E4DC;">
+                <tr style="background-color:#F8F6F2;">
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;width:38%;border-bottom:1px solid #E8E4DC;">&#128100; Nom</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;">{{CLIENT_NAME}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;border-bottom:1px solid #E8E4DC;">&#128222; Téléphone</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;">
+                    <a href="tel:{{CLIENT_PHONE}}" style="color:#C8973A;text-decoration:none;font-weight:600;">{{CLIENT_PHONE}}</a>
+                  </td>
+                </tr>
+                <tr style="background-color:#F8F6F2;">
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;border-bottom:1px solid #E8E4DC;">&#9993; Email</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;">{{CLIENT_EMAIL}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;border-bottom:1px solid #E8E4DC;">&#128172; Message</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;line-height:1.5;">{{CLIENT_MESSAGE}}</td>
+                </tr>
+                <tr style="background-color:#F8F6F2;">
+                  <td style="padding:13px 18px;font-size:13px;font-weight:600;color:#1A2340;">&#128197; Date de réception</td>
+                  <td style="padding:13px 18px;font-size:13px;color:#444;">{{RECEIVED_DATE}}</td>
+                </tr>
+              </table>
+
+              <!-- CTA -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:32px;">
+                <tr>
+                  <td align="center">
+                    <div style="font-size:13px;color:#888;margin-bottom:16px;">Répondez rapidement pour maximiser vos chances de conclure cette vente.</div>
+                    <a href="tel:{{CLIENT_PHONE}}" style="display:inline-block;background:linear-gradient(135deg,#C8973A,#E0B060);color:#FFFFFF;font-size:14px;font-weight:700;padding:14px 36px;border-radius:50px;text-decoration:none;letter-spacing:0.5px;">
+                      &#128222; Appeler le client maintenant
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#1A2340;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;">
+              <div style="font-size:13px;font-weight:700;color:#C8973A;margin-bottom:6px;">IMMOMAROC</div>
+              <div style="font-size:11px;color:#6B7494;line-height:1.6;">
+                Cet email a été envoyé automatiquement par la plateforme ImmoMaroc.<br/>
+                © {{YEAR}} ImmoMaroc — Tous droits réservés.
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

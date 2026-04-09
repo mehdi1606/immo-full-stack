@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message reçu – ImmoMaroc</title>
+</head>
+<body style="margin:0;padding:0;background-color:#F0EDE8;font-family:'Segoe UI',Arial,sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F0EDE8;padding:32px 0;">
+    <tr>
+      <td align="center">
+        <table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#1A2340 0%,#243058 100%);border-radius:12px 12px 0 0;padding:36px 40px;text-align:center;">
+              <div style="font-size:28px;font-weight:800;color:#C8973A;letter-spacing:2px;text-transform:uppercase;">IMMO<span style="color:#FFFFFF;">MAROC</span></div>
+              <div style="font-size:12px;color:#A0A8BF;margin-top:4px;letter-spacing:3px;text-transform:uppercase;">L'immobilier de confiance au Maroc</div>
+            </td>
+          </tr>
+
+          <!-- Green banner -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#0D7A5F,#10A37F);padding:14px 40px;text-align:center;">
+              <span style="font-size:14px;font-weight:700;color:#FFFFFF;letter-spacing:1px;text-transform:uppercase;">
+                &#10003; Message bien reçu
+              </span>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="background-color:#FFFFFF;padding:40px 40px 32px 40px;">
+
+              <p style="margin:0 0 8px 0;font-size:18px;color:#1A2340;font-weight:700;">Bonjour {{CLIENT_NAME}},</p>
+              <p style="margin:0 0 28px 0;font-size:15px;color:#555;line-height:1.7;">
+                Merci de nous avoir contactés. Nous avons bien reçu votre message concernant :
+              </p>
+
+              <!-- Subject highlight -->
+              <div style="background:linear-gradient(135deg,#1A2340,#243058);border-radius:10px;padding:18px 24px;margin-bottom:28px;text-align:center;">
+                <div style="font-size:13px;color:#A0A8BF;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Sujet</div>
+                <div style="font-size:16px;font-weight:700;color:#C8973A;">{{SUBJECT}}</div>
+              </div>
+
+              <p style="margin:0 0 24px 0;font-size:15px;color:#555;line-height:1.7;">
+                Notre équipe vous répondra dans les <strong style="color:#1A2340;">24 à 48 heures ouvrables</strong>.
+                Si votre demande est urgente, n'hésitez pas à nous appeler directement.
+              </p>
+
+              <!-- Contact info -->
+              <div style="background-color:#F8F6F2;border-radius:10px;padding:20px 24px;margin-bottom:28px;">
+                <div style="font-size:12px;color:#C8973A;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Nous contacter directement</div>
+                <div style="font-size:13px;color:#444;line-height:2;">
+                  &#128222; <strong>+212 522 334 455</strong><br/>
+                  &#9993; <a href="mailto:contact@immomaroc.ma" style="color:#C8973A;text-decoration:none;">contact@immomaroc.ma</a><br/>
+                  &#128197; Lun – Ven, 09h00 – 18h00
+                </div>
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#1A2340;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;">
+              <div style="font-size:13px;font-weight:700;color:#C8973A;margin-bottom:6px;">IMMOMAROC</div>
+              <div style="font-size:11px;color:#6B7494;line-height:1.6;">
+                Cet email est une confirmation automatique, merci de ne pas y répondre directement.<br/>
+                © {{YEAR}} ImmoMaroc — Tous droits réservés.
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

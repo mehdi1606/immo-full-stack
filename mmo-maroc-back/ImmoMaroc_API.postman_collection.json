@@ -1,0 +1,788 @@
+{
+  "info": {
+    "name": "ImmoMaroc API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Complete API collection for ImmoMaroc backend — port 8090"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8090" },
+    { "key": "token",   "value": "" },
+    { "key": "agentId", "value": "1" },
+    { "key": "propertyId", "value": "1" },
+    { "key": "leadId",  "value": "1" },
+    { "key": "sellRequestId", "value": "1" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
+  "item": [
+
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) {",
+                  "  pm.collectionVariables.set('token', res.token);",
+                  "  console.log('✅ Token saved');",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@immomaroc.ma\",\n  \"password\": \"admin123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Current User (me)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/auth/me"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "👤 Agents",
+      "item": [
+        {
+          "name": "Get All Agents",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/agents",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "agents"],
+              "query": [
+                { "key": "city", "value": "Casablanca", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Agents — Filter by City",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/agents?city=Casablanca",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "agents"],
+              "query": [{ "key": "city", "value": "Casablanca" }]
+            }
+          }
+        },
+        {
+          "name": "Get Agent by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/agents/{{agentId}}"
+          }
+        },
+        {
+          "name": "Create Agent [ADMIN]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/agents",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Youssef Alami\",\n  \"email\": \"youssef@immomaroc.ma\",\n  \"password\": \"agent123\",\n  \"phone\": \"+212 6 12 34 56 78\",\n  \"whatsapp\": \"+212 6 12 34 56 78\",\n  \"agency\": \"ImmoMaroc Casablanca\",\n  \"city\": \"Casablanca\",\n  \"bio\": \"Expert immobilier avec 10 ans d'expérience à Casablanca.\",\n  \"verified\": true,\n  \"specialties\": [\"Appartements\", \"Villas\", \"Bureaux\"]\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Agent [ADMIN]",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/agents/{{agentId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Youssef Alami\",\n  \"email\": \"youssef@immomaroc.ma\",\n  \"phone\": \"+212 6 99 88 77 66\",\n  \"whatsapp\": \"+212 6 99 88 77 66\",\n  \"agency\": \"ImmoMaroc Premium\",\n  \"city\": \"Casablanca\",\n  \"bio\": \"Expert immobilier avec 12 ans d'expérience.\",\n  \"rating\": 4.8,\n  \"sold\": 45,\n  \"verified\": true,\n  \"specialties\": [\"Villas\", \"Riads\"]\n}"
+            }
+          }
+        },
+        {
+          "name": "Toggle Agent Status [ADMIN]",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/agents/{{agentId}}/status"
+          }
+        },
+        {
+          "name": "Delete Agent [ADMIN]",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/agents/{{agentId}}"
+          }
+        },
+        {
+          "name": "Update My Profile [AGENT]",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/agents/me/profile",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Youssef Alami\",\n  \"phone\": \"+212 6 12 34 56 78\",\n  \"whatsapp\": \"+212 6 12 34 56 78\",\n  \"agency\": \"ImmoMaroc Casablanca\",\n  \"city\": \"Casablanca\",\n  \"bio\": \"Votre conseiller de confiance.\"\n}"
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🏠 Properties",
+      "item": [
+        {
+          "name": "Search Properties — French (default)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties?page=0&size=12",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "12" },
+                { "key": "lang", "value": "fr", "disabled": true },
+                { "key": "city", "value": "Casablanca", "disabled": true },
+                { "key": "type", "value": "APPARTEMENT", "disabled": true },
+                { "key": "purpose", "value": "VENTE", "disabled": true },
+                { "key": "status", "value": "DISPONIBLE", "disabled": true },
+                { "key": "minPrice", "value": "500000", "disabled": true },
+                { "key": "maxPrice", "value": "3000000", "disabled": true },
+                { "key": "minRooms", "value": "2", "disabled": true },
+                { "key": "q", "value": "luxe", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Properties → Arabic 🇲🇦",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties?page=0&size=12&lang=ar",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "12" },
+                { "key": "lang", "value": "ar" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Properties → English 🇬🇧",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties?page=0&size=12&lang=en",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "12" },
+                { "key": "lang", "value": "en" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Properties → Arabic via Header",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept-Language", "value": "ar-MA,ar;q=0.9" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/properties?page=0&size=12",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "12" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search — Vente à Casablanca",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties?city=Casablanca&purpose=VENTE&page=0&size=6",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties"],
+              "query": [
+                { "key": "city", "value": "Casablanca" },
+                { "key": "purpose", "value": "VENTE" },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "6" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search — Appartements par prix",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties?type=APPARTEMENT&minPrice=500000&maxPrice=2000000&page=0&size=12",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties"],
+              "query": [
+                { "key": "type", "value": "APPARTEMENT" },
+                { "key": "minPrice", "value": "500000" },
+                { "key": "maxPrice", "value": "2000000" },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "12" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Property by ID → French",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/properties/{{propertyId}}"
+          }
+        },
+        {
+          "name": "Get Property by ID → Arabic 🇲🇦",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties/{{propertyId}}?lang=ar",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties", "{{propertyId}}"],
+              "query": [{ "key": "lang", "value": "ar" }]
+            }
+          }
+        },
+        {
+          "name": "Get Property by ID → English 🇬🇧",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties/{{propertyId}}?lang=en",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties", "{{propertyId}}"],
+              "query": [{ "key": "lang", "value": "en" }]
+            }
+          }
+        },
+        {
+          "name": "Get Featured Properties → Arabic",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties/featured?lang=ar",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties", "featured"],
+              "query": [{ "key": "lang", "value": "ar" }]
+            }
+          }
+        },
+        {
+          "name": "Get Featured Properties → English",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties/featured?lang=en",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties", "featured"],
+              "query": [{ "key": "lang", "value": "en" }]
+            }
+          }
+        },
+        {
+          "name": "Get Properties by Agent → Arabic",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/properties/agent/{{agentId}}?lang=ar",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "properties", "agent", "{{agentId}}"],
+              "query": [{ "key": "lang", "value": "ar" }]
+            }
+          }
+        },
+        {
+          "name": "Create Property [AGENT]",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/properties",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Appartement de luxe — Maarif\",\n  \"type\": \"APPARTEMENT\",\n  \"purpose\": \"VENTE\",\n  \"city\": \"Casablanca\",\n  \"neighborhood\": \"Maarif\",\n  \"price\": 1850000,\n  \"area\": 120.0,\n  \"rooms\": 3,\n  \"bathrooms\": 2,\n  \"floor\": 4,\n  \"parking\": true,\n  \"elevator\": true,\n  \"furnished\": false,\n  \"featured\": false,\n  \"description\": \"Magnifique appartement dans un immeuble neuf au cœur du Maarif. Vue dégagée, finitions haut de gamme.\",\n  \"features\": [\"Terrasse\", \"Climatisation\", \"Cuisine équipée\", \"Gardien\"],\n  \"imageUrls\": []\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Property [AGENT]",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/properties/{{propertyId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Appartement de luxe — Maarif (MàJ)\",\n  \"type\": \"APPARTEMENT\",\n  \"purpose\": \"VENTE\",\n  \"city\": \"Casablanca\",\n  \"neighborhood\": \"Maarif\",\n  \"price\": 1750000,\n  \"area\": 120.0,\n  \"rooms\": 3,\n  \"bathrooms\": 2,\n  \"floor\": 4,\n  \"parking\": true,\n  \"elevator\": true,\n  \"furnished\": true,\n  \"description\": \"Description mise à jour.\",\n  \"features\": [\"Terrasse\", \"Climatisation\"],\n  \"imageUrls\": []\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Property Status [AGENT]",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/properties/{{propertyId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"VENDU\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Toggle Featured [ADMIN]",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/properties/{{propertyId}}/featured"
+          }
+        },
+        {
+          "name": "Delete Property [AGENT/ADMIN]",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/properties/{{propertyId}}"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "📋 Leads",
+      "item": [
+        {
+          "name": "Create Lead (Public)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/leads",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Karim Benali\",\n  \"phone\": \"+212 6 55 44 33 22\",\n  \"email\": \"karim.benali@gmail.com\",\n  \"message\": \"Bonjour, je suis intéressé par ce bien. Pouvez-vous me contacter ?\",\n  \"propertyId\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Get My Leads [AGENT]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/leads/mine",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leads", "mine"],
+              "query": [
+                { "key": "status", "value": "NEW", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get My Leads — Filter NEW [AGENT]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/leads/mine?status=NEW",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leads", "mine"],
+              "query": [{ "key": "status", "value": "NEW" }]
+            }
+          }
+        },
+        {
+          "name": "Get All Leads [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/leads",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leads"],
+              "query": [
+                { "key": "status", "value": "NEW", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Lead Status [AGENT/ADMIN]",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/leads/{{leadId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"CONTACTED\"\n}"
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🏷️ Sell Requests",
+      "item": [
+        {
+          "name": "Create Sell Request (Public)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/sell-requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Fatima Zahra\",\n  \"phone\": \"+212 6 77 88 99 00\",\n  \"email\": \"fatima.zahra@gmail.com\",\n  \"city\": \"Rabat\",\n  \"propertyType\": \"VILLA\",\n  \"purpose\": \"VENTE\",\n  \"price\": 4500000,\n  \"area\": 280.0,\n  \"rooms\": 5,\n  \"title\": \"Belle villa à Hay Riad\",\n  \"description\": \"Villa de standing avec piscine et jardin dans un quartier résidentiel calme.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Sell Requests [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/sell-requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sell-requests"],
+              "query": [
+                { "key": "status", "value": "PENDING", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Sell Requests — Filter PENDING [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/sell-requests?status=PENDING",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "sell-requests"],
+              "query": [{ "key": "status", "value": "PENDING" }]
+            }
+          }
+        },
+        {
+          "name": "Update Sell Request Status [ADMIN]",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/sell-requests/{{sellRequestId}}/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"IN_PROGRESS\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Assign Sell Request to Agent [ADMIN]",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/sell-requests/{{sellRequestId}}/assign",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agentId\": 1\n}"
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "❤️ Favorites",
+      "item": [
+        {
+          "name": "Get My Favorites",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/favorites"
+          }
+        },
+        {
+          "name": "Add to Favorites",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/favorites/{{propertyId}}"
+          }
+        },
+        {
+          "name": "Remove from Favorites",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/favorites/{{propertyId}}"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "📊 Stats",
+      "item": [
+        {
+          "name": "Overview [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/stats/overview"
+          }
+        },
+        {
+          "name": "By Month [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/stats/by-month"
+          }
+        },
+        {
+          "name": "Top Agents [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/stats/top-agents"
+          }
+        },
+        {
+          "name": "By City [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/stats/by-city"
+          }
+        },
+        {
+          "name": "By Type [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/stats/by-type"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🌍 Translation",
+      "item": [
+
+        {
+          "name": "Supported Languages (Public)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/translate/languages"
+          }
+        },
+
+        {
+          "name": "Translate Any Text → Arabic (Public)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/translate/text",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Appartement moderne au cœur de Casablanca avec vue sur mer.\",\n  \"sourceLang\": \"fr\",\n  \"targetLang\": \"ar\"\n}"
+            }
+          }
+        },
+
+        {
+          "name": "Translate Any Text → English (Public)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/api/translate/text",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Belle villa avec piscine dans un quartier résidentiel calme.\",\n  \"sourceLang\": \"fr\",\n  \"targetLang\": \"en\"\n}"
+            }
+          }
+        },
+
+        {
+          "name": "Get Property Translated → Arabic",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/translate/property/{{propertyId}}?lang=ar",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "translate", "property", "{{propertyId}}"],
+              "query": [{ "key": "lang", "value": "ar" }]
+            }
+          }
+        },
+
+        {
+          "name": "Get Property Translated → English",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/translate/property/{{propertyId}}?lang=en",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "translate", "property", "{{propertyId}}"],
+              "query": [{ "key": "lang", "value": "en" }]
+            }
+          }
+        },
+
+        {
+          "name": "Get Property Translated via Accept-Language Header",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept-Language", "value": "ar-MA,ar;q=0.9" }],
+            "url": "{{baseUrl}}/api/translate/property/{{propertyId}}"
+          }
+        },
+
+        {
+          "name": "Get Agent Translated → English",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/translate/agent/{{agentId}}?lang=en",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "translate", "agent", "{{agentId}}"],
+              "query": [{ "key": "lang", "value": "en" }]
+            }
+          }
+        },
+
+        {
+          "name": "Force Re-translate Property Field [ADMIN]",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/translate/property/{{propertyId}}/retranslate?fieldName=description&lang=ar",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "translate", "property", "{{propertyId}}", "retranslate"],
+              "query": [
+                { "key": "fieldName", "value": "description" },
+                { "key": "lang",      "value": "ar" }
+              ]
+            }
+          }
+        },
+
+        {
+          "name": "Evict Property Translations (cache clear) [ADMIN]",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/translate/property/{{propertyId}}"
+          }
+        },
+
+        {
+          "name": "Translation Stats [ADMIN]",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/translate/stats"
+          }
+        }
+
+      ]
+    },
+
+    {
+      "name": "📁 File Upload",
+      "item": [
+        {
+          "name": "Upload Image [AGENT/ADMIN]",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/upload/image",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "",
+                  "description": "Select an image file (JPG/PNG, max 5MB)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete File [AGENT/ADMIN]",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/upload/photo_abc123.jpg"
+          }
+        }
+      ]
+    }
+
+  ]
+}

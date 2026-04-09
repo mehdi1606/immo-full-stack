@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/PC/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/738cb7cf-331f-47cb-a571-740fe30b35fe/2d748ed3-1dd7-4b9e-8b83-eccfba43cf79/skills/pptx/**)",
+      "Bash(python -m markitdown \"C:\\\\Users\\\\PC\\\\Downloads\\\\ImmoMaroc_V3_Final.pptx\")",
+      "Bash(pip install:*)",
+      "Bash(npm install:*)",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:www.sarouty.ma)",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:images.unsplash.com)",
+      "WebFetch(domain:awik.io)",
+      "WebFetch(domain:dev.to)",
+      "WebFetch(domain:api.unsplash.com)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:sutikshandwivedi.medium.com)",
+      "WebFetch(domain:www.story-rabat.com)",
+      "WebFetch(domain:sights2see.com)",
+      "WebFetch(domain:www.theblondeabroad.com)",
+      "WebFetch(domain:images.pexels.com)",
+      "Bash(node -e \":*)",
+      "Bash(findstr -i \"icon\\\\|lucide\\\\|heroicon\\\\|react-icon\")"
+    ]
+  }
+}

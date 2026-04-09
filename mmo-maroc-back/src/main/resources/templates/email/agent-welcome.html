@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bienvenue sur ImmoMaroc</title>
+</head>
+<body style="margin:0;padding:0;background-color:#F0EDE8;font-family:'Segoe UI',Arial,sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F0EDE8;padding:32px 0;">
+    <tr>
+      <td align="center">
+        <table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#1A2340 0%,#243058 100%);border-radius:12px 12px 0 0;padding:36px 40px;text-align:center;">
+              <div style="font-size:28px;font-weight:800;color:#C8973A;letter-spacing:2px;text-transform:uppercase;">IMMO<span style="color:#FFFFFF;">MAROC</span></div>
+              <div style="font-size:12px;color:#A0A8BF;margin-top:4px;letter-spacing:3px;text-transform:uppercase;">Immobilier de Prestige au Maroc</div>
+            </td>
+          </tr>
+
+          <!-- Welcome banner -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#C8973A,#D4A84B);padding:14px 40px;text-align:center;">
+              <span style="font-size:14px;font-weight:700;color:#FFFFFF;letter-spacing:1px;text-transform:uppercase;">
+                &#127881; Bienvenue dans l'équipe ImmoMaroc !
+              </span>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="background-color:#FFFFFF;padding:40px 40px 32px 40px;">
+
+              <!-- Greeting -->
+              <p style="margin:0 0 6px 0;font-size:22px;color:#1A2340;font-weight:700;">Bonjour {{AGENT_NAME}},</p>
+              <p style="margin:0 0 28px 0;font-size:15px;color:#555;line-height:1.7;">
+                Votre compte agent a été créé avec succès sur la plateforme ImmoMaroc.<br/>
+                Vous pouvez dès maintenant accéder à votre espace agent et commencer à gérer vos annonces.
+              </p>
+
+              <!-- Credentials card -->
+              <div style="font-size:12px;color:#C8973A;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Vos identifiants de connexion</div>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-radius:8px;overflow:hidden;border:1px solid #E8E4DC;margin-bottom:28px;">
+                <tr style="background-color:#F8F6F2;">
+                  <td style="padding:14px 18px;font-size:13px;font-weight:600;color:#1A2340;width:40%;border-bottom:1px solid #E8E4DC;">&#128231; Email</td>
+                  <td style="padding:14px 18px;font-size:13px;color:#444;border-bottom:1px solid #E8E4DC;">{{AGENT_EMAIL}}</td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 18px;font-size:13px;font-weight:600;color:#1A2340;">&#128274; Mot de passe temporaire</td>
+                  <td style="padding:14px 18px;">
+                    <span style="font-size:16px;font-weight:800;color:#1A2340;letter-spacing:2px;background:#F0EDE8;padding:4px 12px;border-radius:6px;display:inline-block;">{{AGENT_PASSWORD}}</span>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Security notice -->
+              <div style="background:#FFF8EC;border:1px solid #F0D080;border-radius:8px;padding:16px 20px;margin-bottom:28px;">
+                <div style="font-size:13px;font-weight:700;color:#9A6C00;margin-bottom:4px;">&#9888; Important — Sécurité</div>
+                <div style="font-size:13px;color:#7A5200;line-height:1.6;">
+                  Ce mot de passe est temporaire. Nous vous recommandons de le modifier dès votre première connexion depuis votre espace profil.
+                </div>
+              </div>
+
+              <!-- Steps -->
+              <div style="font-size:12px;color:#C8973A;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Pour commencer</div>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;padding:0 12px 16px 0;width:33%;">
+                    <div style="background:#F8F6F2;border-radius:8px;padding:18px;text-align:center;">
+                      <div style="font-size:24px;margin-bottom:8px;">&#128274;</div>
+                      <div style="font-size:12px;font-weight:700;color:#1A2340;margin-bottom:4px;">Connexion</div>
+                      <div style="font-size:11px;color:#888;line-height:1.5;">Connectez-vous avec vos identifiants</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align:top;padding:0 6px 16px 6px;width:33%;">
+                    <div style="background:#F8F6F2;border-radius:8px;padding:18px;text-align:center;">
+                      <div style="font-size:24px;margin-bottom:8px;">&#128100;</div>
+                      <div style="font-size:12px;font-weight:700;color:#1A2340;margin-bottom:4px;">Profil</div>
+                      <div style="font-size:11px;color:#888;line-height:1.5;">Complétez votre profil agent</div>
+                    </div>
+                  </td>
+                  <td style="vertical-align:top;padding:0 0 16px 12px;width:33%;">
+                    <div style="background:#F8F6F2;border-radius:8px;padding:18px;text-align:center;">
+                      <div style="font-size:24px;margin-bottom:8px;">&#127968;</div>
+                      <div style="font-size:12px;font-weight:700;color:#1A2340;margin-bottom:4px;">Annonces</div>
+                      <div style="font-size:11px;color:#888;line-height:1.5;">Publiez vos premières annonces</div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:20px 0 0 0;font-size:14px;color:#555;line-height:1.6;">
+                Pour toute question, contactez l'administration.<br/>
+                <strong style="color:#1A2340;">L'équipe ImmoMaroc</strong>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#1A2340;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;">
+              <div style="font-size:13px;font-weight:700;color:#C8973A;margin-bottom:6px;">IMMOMAROC</div>
+              <div style="font-size:11px;color:#6B7494;line-height:1.6;">
+                Cet email a été envoyé automatiquement suite à la création de votre compte.<br/>
+                © {{YEAR}} ImmoMaroc — Tous droits réservés.
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

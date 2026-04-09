@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\PC\\\\immo-maroc-project\\\\mmo-maroc-back\\\\src\\\\main\\\\java\\\\com\\\\immomaroc\\\\config\")"
+    ]
+  }
+}
