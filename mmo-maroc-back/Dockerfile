@@ -26,9 +26,9 @@ RUN ./mvnw package -DskipTests -q
 FROM eclipse-temurin:20-jre-jammy
 WORKDIR /app
 
-# Install curl (used by Docker healthcheck) + clean apt cache
+# Install curl (healthcheck) + gosu (privilege drop in entrypoint)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
+    apt-get install -y --no-install-recommends curl gosu && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user to run the app (security best practice)
@@ -42,17 +42,10 @@ COPY --from=builder /app/target/*.jar app.jar
 RUN mkdir -p /var/immomaroc/uploads && \
     chown -R spring:spring /app /var/immomaroc
 
-# Switch to non-root user
-USER spring
-
 EXPOSE 8090
 
-# JVM tuning flags for containerised environments:
-#   -XX:+UseContainerSupport       → JVM respects Docker memory limits
-#   -XX:MaxRAMPercentage=75.0      → use 75% of container RAM for heap
-#   -Djava.security.egd=...urandom → faster startup (non-blocking random)
-ENTRYPOINT ["java", \
-  "-XX:+UseContainerSupport", \
-  "-XX:MaxRAMPercentage=75.0", \
-  "-Djava.security.egd=file:/dev/./urandom", \
-  "-jar", "app.jar"]
+# entrypoint.sh runs as root, fixes volume permissions, then drops to spring via gosu
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

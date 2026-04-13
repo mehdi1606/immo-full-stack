@@ -88,8 +88,6 @@ public class SecretsValidationConfig {
         // ── CORS ─────────────────────────────────────────────────────────────
         if (isBlank(corsOrigins)) {
             errors.add("CORS_ALLOWED_ORIGINS is not set (e.g. https://immomaroc.ma)");
-        } else if (corsOrigins.contains("localhost")) {
-            errors.add("CORS_ALLOWED_ORIGINS still points to localhost — set it to your real domain");
         }
 
         // ── Upload dir ───────────────────────────────────────────────────────

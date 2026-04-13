@@ -76,12 +76,13 @@ export function getImageUrl(img) {
   if (!img) return 'https://placehold.co/400x300?text=ImmoMaroc';
   if (img.startsWith('http')) return img;
   // Backend returns relative paths like "/uploads/filename.jpg"
-  return `http://localhost:8090${img.startsWith('/') ? img : '/' + img}`;
+  // Use relative URL so Nginx serves it in Docker and Vite proxy handles it in dev
+  return img.startsWith('/') ? img : '/' + img;
 }
 
 /** Build absolute avatar URL (falls back to generated placeholder) */
 export function getAvatarUrl(avatar) {
   if (!avatar) return 'https://ui-avatars.com/api/?background=1a3a5c&color=fff&name=Agent&size=128';
   if (avatar.startsWith('http')) return avatar;
-  return `http://localhost:8090${avatar.startsWith('/') ? avatar : '/' + avatar}`;
+  return avatar.startsWith('/') ? avatar : '/' + avatar;
 }

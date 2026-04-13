@@ -150,7 +150,7 @@ function PropBar({ label, count, total, gradient }) {
 
 /* ─── Main ─────────────────────────────────────────────────────────── */
 export default function AgentDashboard() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useApp();
 
   const [loading, setLoading]       = useState(true);
