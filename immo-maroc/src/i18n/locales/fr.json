@@ -64,7 +64,10 @@
       "stat2Value": "50 000+",
       "stat2Label": "Acheteurs actifs",
       "stat3Value": "4.9/5",
-      "stat3Label": "Note clients"
+      "stat3Label": "Note clients",
+      "segResidential": "Résidentiel",
+      "segCommercial": "Commercial",
+      "priceLabel": "Prix"
     },
     "quickTypes": {
       "title": "Explorer par type",
@@ -87,7 +90,8 @@
       "title1": "Sélection",
       "title2": "Premium",
       "subtitle": "Des biens d'exception soigneusement sélectionnés par nos agents experts.",
-      "viewAll": "Toutes les annonces"
+      "viewAll": "Toutes les annonces",
+      "loadError": "Impossible de charger les annonces."
     },
     "stats": {
       "listings": "Annonces publiées",
@@ -99,18 +103,46 @@
       "tag": "Par destination",
       "title": "Explorer par ville",
       "subtitle": "Trouvez votre bien dans les principales villes du Maroc.",
-      "listings": "annonces"
+      "listings": "annonces",
+      "Casablanca": "Casablanca",
+      "Marrakech": "Marrakech",
+      "Rabat": "Rabat",
+      "Agadir": "Agadir",
+      "Tanger": "Tanger",
+      "Fès": "Fès"
     },
     "howItWorks": {
       "tag": "Comment ça marche",
+      "titleMain": "3 étapes pour trouver",
+      "titleHighlight": "votre bien",
       "title": "Simple, rapide et sécurisé",
       "subtitle": "Trouvez votre bien idéal en trois étapes simples.",
       "step1Title": "Recherchez",
-      "step1Desc": "Utilisez nos filtres avancés pour affiner votre recherche parmi des milliers d'annonces.",
-      "step2Title": "Visitez",
-      "step2Desc": "Contactez directement l'agent pour organiser une visite à votre convenance.",
-      "step3Title": "Finalisez",
-      "step3Desc": "Finalisez votre transaction en toute sécurité avec l'accompagnement de nos experts."
+      "step1Desc": "Parcourez des milliers d'annonces filtrées par ville, type et budget — en quelques secondes.",
+      "step2Title": "Choisissez un bien",
+      "step2Desc": "Consultez les photos, les détails et la localisation. Contactez directement notre équipe.",
+      "step3Title": "Signez & Emménagez",
+      "step3Desc": "Nos agents vous accompagnent jusqu'à la signature. Simple, rapide et sécurisé."
+    },
+    "categories": {
+      "residentialTitle": "Résidentiel",
+      "residentialSubtitle": "Appartements, villas, studios et terrains",
+      "commercialTitle": "Commercial",
+      "commercialSubtitle": "Bureaux, riads, locaux et terrains",
+      "locaux": "Locaux"
+    },
+    "contactBanner": {
+      "tag": "Contactez-nous",
+      "title1": "Un projet immobilier ?",
+      "title2": "Parlons-en.",
+      "desc": "Nos conseillers sont disponibles 7j/7 pour répondre à vos questions, organiser des visites et vous accompagner dans votre projet.",
+      "callBtn": "Appeler maintenant",
+      "item1Title": "Agents vérifiés",
+      "item1Desc": "Tous nos conseillers sont certifiés et expérimentés.",
+      "item2Title": "Réponse rapide",
+      "item2Desc": "Nous vous recontactons sous 30 minutes en journée.",
+      "item3Title": "Sans engagement",
+      "item3Desc": "Consultation gratuite, aucun engagement de votre part."
     },
     "agents": {
       "tag": "Nos experts",
@@ -276,7 +308,9 @@
     "subjectOther": "Autre",
     "messageLabel": "Message *",
     "messagePlaceholder": "Comment pouvons-nous vous aider ?",
-    "sendBtn": "Envoyer le message"
+    "sendBtn": "Envoyer le message",
+    "errorGeneric": "Une erreur est survenue. Veuillez réessayer.",
+    "errorNetwork": "Impossible de joindre le serveur. Vérifiez votre connexion."
   },
   "sell": {
     "heroBadge": "+12 000 acheteurs actifs vous attendent",

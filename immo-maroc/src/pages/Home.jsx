@@ -16,7 +16,7 @@ import { getFeaturedProperties, getImageUrl } from '../api/properties';
 function Hero() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [segment, setSegment] = useState('Résidentiel'); // Résidentiel | Commercial
+  const [segment, setSegment] = useState('residential');
   const [purpose, setPurpose]  = useState('VENTE');
   const [city, setCity]        = useState('');
   const [type, setType]        = useState('');
@@ -68,15 +68,18 @@ function Hero() {
 
           {/* Row 1: all pills + location + search button */}
           <div className="flex flex-wrap items-center gap-2">
-            {/* Résidentiel / Commercial */}
-            {['Résidentiel', 'Commercial'].map(seg => (
-              <button type="button" key={seg} onClick={() => setSegment(seg)}
+            {/* Residential / Commercial */}
+            {[
+              { key: 'residential', label: t('home.hero.segResidential') },
+              { key: 'commercial',  label: t('home.hero.segCommercial') },
+            ].map(({ key, label }) => (
+              <button type="button" key={key} onClick={() => setSegment(key)}
                 className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
-                  segment === seg
+                  segment === key
                     ? 'bg-primary text-white border-primary'
                     : 'border-neutral-200 text-neutral-600 hover:border-primary hover:text-primary bg-white'
                 }`}>
-                {seg}
+                {label}
               </button>
             ))}
 
@@ -132,11 +135,11 @@ function Hero() {
 
             {/* Price range placeholder */}
             <select className="flex-1 min-w-[120px] text-sm text-neutral-600 border border-neutral-200 rounded-full px-4 py-2 outline-none focus:border-primary bg-white cursor-pointer">
-              <option value="">Prix</option>
-              <option>Moins de 1M</option>
-              <option>1M – 3M</option>
-              <option>3M – 7M</option>
-              <option>Plus de 7M</option>
+              <option value="">{t('home.hero.priceLabel')}</option>
+              <option>{t('filters.priceRanges.under1M')}</option>
+              <option>{t('filters.priceRanges.1Mto3M')}</option>
+              <option>{t('filters.priceRanges.3Mto7M')}</option>
+              <option>{t('filters.priceRanges.over7M')}</option>
             </select>
           </div>
         </form>
@@ -170,7 +173,7 @@ const residentialTypes = [
 const commercialTypes = [
   { type: 'BUREAU',      img: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80' },
   { type: 'RIAD',        img: 'https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80' },
-  { type: 'APPARTEMENT', img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80', label: 'Locaux' },
+  { type: 'APPARTEMENT', img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80', labelKey: 'home.categories.locaux' },
   { type: 'TERRAIN',     img: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=600&q=80' },
 ];
 
@@ -181,7 +184,7 @@ function Categories() {
   const TypeCard = ({ item }) => (
     <button onClick={() => navigate(`/recherche?type=${item.type}`)}
       className="relative overflow-hidden rounded-2xl group cursor-pointer text-left shadow-sm hover:shadow-xl transition-shadow duration-300">
-      <img src={item.img} alt={item.label || t(`home.quickTypes.types.${item.type}`)}
+      <img src={item.img} alt={item.labelKey ? t(item.labelKey) : t(`home.quickTypes.types.${item.type}`)}
         className="w-full h-36 object-cover transition-transform duration-700 group-hover:scale-110"
         onError={e => { e.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80'; }}
       />
@@ -190,7 +193,7 @@ function Categories() {
       <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="absolute bottom-0 left-0 p-4">
         <p className="text-white font-bold text-[15px] leading-tight drop-shadow-md">
-          {item.label || t(`home.quickTypes.types.${item.type}`)}
+          {item.labelKey ? t(item.labelKey) : t(`home.quickTypes.types.${item.type}`)}
         </p>
       </div>
       {/* Arrow on hover */}
@@ -204,12 +207,12 @@ function Categories() {
     <section className="py-14 bg-neutral-50">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Résidentiel */}
+          {/* Residential */}
           <div className="bg-white rounded-2xl shadow-card p-6">
             <div className="flex items-center justify-between mb-5">
               <div>
-                <h2 className="font-serif text-xl font-bold text-neutral-900">Résidentiel</h2>
-                <p className="text-neutral-400 text-xs mt-0.5">Appartements, villas, studios et terrains</p>
+                <h2 className="font-serif text-xl font-bold text-neutral-900">{t('home.categories.residentialTitle')}</h2>
+                <p className="text-neutral-400 text-xs mt-0.5">{t('home.categories.residentialSubtitle')}</p>
               </div>
               <Link to="/recherche" className="text-xs text-primary font-medium hover:underline flex items-center gap-1">
                 {t('home.quickTypes.viewAll')} <ChevronRight size={12} />
@@ -224,8 +227,8 @@ function Categories() {
           <div className="bg-white rounded-2xl shadow-card p-6">
             <div className="flex items-center justify-between mb-5">
               <div>
-                <h2 className="font-serif text-xl font-bold text-neutral-900">Commercial</h2>
-                <p className="text-neutral-400 text-xs mt-0.5">Bureaux, riads, locaux et terrains</p>
+                <h2 className="font-serif text-xl font-bold text-neutral-900">{t('home.categories.commercialTitle')}</h2>
+                <p className="text-neutral-400 text-xs mt-0.5">{t('home.categories.commercialSubtitle')}</p>
               </div>
               <Link to="/recherche" className="text-xs text-primary font-medium hover:underline flex items-center gap-1">
                 {t('home.quickTypes.viewAll')} <ChevronRight size={12} />
@@ -276,7 +279,7 @@ function FeaturedProperties() {
           images: [getImageUrl(p.mainImageUrl)],
         })));
       })
-      .catch(() => setError('Impossible de charger les annonces.'))
+      .catch(() => setError(t('home.featured.loadError')))
       .finally(() => setLoading(false));
   }, [i18n.language]);
 
@@ -406,32 +409,32 @@ function FeaturedProperties() {
 function HowItWorks() {
   const { t } = useTranslation();
   const steps = [
-    { num: '01', icon: Search,        title: 'Recherchez',          desc: 'Parcourez des milliers d\'annonces filtrées par ville, type et budget — en quelques secondes.' },
-    { num: '02', icon: ClipboardList, title: 'Choisissez un bien',  desc: 'Consultez les photos, les détails et la localisation. Contactez directement notre équipe.' },
-    { num: '03', icon: UserCheck,     title: 'Signez & Emménagez',  desc: 'Nos agents vous accompagnent jusqu\'à la signature. Simple, rapide et sécurisé.' },
+    { num: '01', icon: Search,        titleKey: 'home.howItWorks.step1Title', descKey: 'home.howItWorks.step1Desc' },
+    { num: '02', icon: ClipboardList, titleKey: 'home.howItWorks.step2Title', descKey: 'home.howItWorks.step2Desc' },
+    { num: '03', icon: UserCheck,     titleKey: 'home.howItWorks.step3Title', descKey: 'home.howItWorks.step3Desc' },
   ];
   return (
     <section className="py-16 bg-primary">
       <div className="container-custom">
         <div className="text-center mb-12">
           <p className="section-tag justify-center text-accent mb-2">
-            <span className="w-5 h-0.5 bg-accent" /> Comment ça marche
+            <span className="w-5 h-0.5 bg-accent" /> {t('home.howItWorks.tag')}
           </p>
           <h2 className="font-serif text-3xl font-bold text-white">
-            3 étapes pour trouver <span className="text-accent">votre bien</span>
+            {t('home.howItWorks.titleMain')} <span className="text-accent">{t('home.howItWorks.titleHighlight')}</span>
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
           {/* Connecting line */}
           <div className="hidden md:block absolute top-10 left-1/4 right-1/4 h-px bg-white/20 z-0" />
-          {steps.map(({ num, icon: Icon, title, desc }) => (
+          {steps.map(({ num, icon: Icon, titleKey, descKey }) => (
             <div key={num} className="relative z-10 bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-7 text-center hover:bg-white/15 transition-all">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/20 border border-accent/30 mb-5">
                 <Icon size={24} className="text-accent" />
               </div>
               <span className="absolute top-5 right-5 text-white/20 font-bold text-3xl leading-none">{num}</span>
-              <h3 className="font-bold text-white text-base mb-2">{title}</h3>
-              <p className="text-white/60 text-sm leading-relaxed">{desc}</p>
+              <h3 className="font-bold text-white text-base mb-2">{t(titleKey)}</h3>
+              <p className="text-white/60 text-sm leading-relaxed">{t(descKey)}</p>
             </div>
           ))}
         </div>
@@ -538,7 +541,7 @@ function CitiesSection() {
               <img src={img} alt={city} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-4 left-4">
-                <p className="text-white font-bold text-lg">{city}</p>
+                <p className="text-white font-bold text-lg">{t(`home.cities.${city}`)}</p>
               </div>
             </button>
           ))}
@@ -550,6 +553,12 @@ function CitiesSection() {
 
 // ─── Contact Banner ──────────────────────────────────────────────────────────
 function ContactBanner() {
+  const { t } = useTranslation();
+  const items = [
+    { icon: ShieldCheck, color: 'bg-primary/10 text-primary',        titleKey: 'home.contactBanner.item1Title', descKey: 'home.contactBanner.item1Desc' },
+    { icon: Zap,         color: 'bg-accent/10 text-accent',          titleKey: 'home.contactBanner.item2Title', descKey: 'home.contactBanner.item2Desc' },
+    { icon: CheckCircle2,color: 'bg-emerald-100 text-emerald-600',   titleKey: 'home.contactBanner.item3Title', descKey: 'home.contactBanner.item3Desc' },
+  ];
   return (
     <section className="py-12 bg-neutral-50">
       <div className="container-custom">
@@ -558,42 +567,37 @@ function ContactBanner() {
             {/* Left: text */}
             <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center">
               <p className="section-tag mb-3">
-                <span className="w-5 h-0.5 bg-accent" /> Contactez-nous
+                <span className="w-5 h-0.5 bg-accent" /> {t('home.contactBanner.tag')}
               </p>
               <h2 className="font-serif text-3xl font-bold text-neutral-900 mb-3 leading-tight">
-                Un projet immobilier ?<br />
-                <span className="text-primary">Parlons-en.</span>
+                {t('home.contactBanner.title1')}<br />
+                <span className="text-primary">{t('home.contactBanner.title2')}</span>
               </h2>
               <p className="text-neutral-500 text-sm leading-relaxed mb-8 max-w-sm">
-                Nos conseillers sont disponibles 7j/7 pour répondre à vos questions,
-                organiser des visites et vous accompagner dans votre projet.
+                {t('home.contactBanner.desc')}
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href="tel:+212600000000"
                   className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-primary-700 transition-colors">
-                  <Phone size={16} /> Appeler maintenant
+                  <Phone size={16} /> {t('home.contactBanner.callBtn')}
                 </a>
                 <a href="https://wa.me/212600000000" target="_blank" rel="noreferrer"
                   className="flex items-center gap-2 bg-emerald-500 text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-emerald-600 transition-colors">
-                  <MessageCircle size={16} /> WhatsApp
+                  <MessageCircle size={16} /> {t('common.whatsapp')}
                 </a>
               </div>
             </div>
 
             {/* Right: quick info cards */}
             <div className="bg-neutral-50 p-6 sm:p-8 md:p-10 flex flex-col gap-4 justify-center">
-              {[
-                { icon: ShieldCheck, color: 'bg-primary/10 text-primary',   title: 'Agents vérifiés',     desc: 'Tous nos conseillers sont certifiés et expérimentés.' },
-                { icon: Zap,         color: 'bg-accent/10 text-accent',     title: 'Réponse rapide',      desc: 'Nous vous recontactons sous 30 minutes en journée.' },
-                { icon: CheckCircle2,color: 'bg-emerald-100 text-emerald-600', title: 'Sans engagement',  desc: 'Consultation gratuite, aucun engagement de votre part.' },
-              ].map(({ icon: Icon, color, title, desc }) => (
-                <div key={title} className="flex items-start gap-4 bg-white rounded-2xl p-4 shadow-sm">
+              {items.map(({ icon: Icon, color, titleKey, descKey }) => (
+                <div key={titleKey} className="flex items-start gap-4 bg-white rounded-2xl p-4 shadow-sm">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
                     <Icon size={18} />
                   </div>
                   <div>
-                    <p className="font-semibold text-neutral-900 text-sm">{title}</p>
-                    <p className="text-neutral-500 text-xs mt-0.5 leading-relaxed">{desc}</p>
+                    <p className="font-semibold text-neutral-900 text-sm">{t(titleKey)}</p>
+                    <p className="text-neutral-500 text-xs mt-0.5 leading-relaxed">{t(descKey)}</p>
                   </div>
                 </div>
               ))}

@@ -35,7 +35,7 @@ export default function Contact() {
         const data = await res.json().catch(() => ({}));
         const msg = data?.errors
           ? Object.values(data.errors).join(', ')
-          : data?.message || 'Une erreur est survenue. Veuillez réessayer.';
+          : data?.message || t('contact.errorGeneric');
         setErrorMsg(msg);
         setStatus('error');
         return;
@@ -44,7 +44,7 @@ export default function Contact() {
       setStatus('success');
       setForm({ name: '', phone: '', email: '', subject: '', message: '' });
     } catch {
-      setErrorMsg('Impossible de joindre le serveur. Vérifiez votre connexion.');
+      setErrorMsg(t('contact.errorNetwork'));
       setStatus('error');
     }
   };

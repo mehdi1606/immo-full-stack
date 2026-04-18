@@ -61,7 +61,7 @@ export default function SellProperty() {
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
-      setSubmitError(err.message || 'Une erreur est survenue. Veuillez réessayer.');
+      setSubmitError(err.message || t('contact.errorGeneric'));
     } finally {
       setSubmitting(false);
     }

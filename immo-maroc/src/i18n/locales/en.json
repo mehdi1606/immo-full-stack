@@ -64,7 +64,10 @@
       "stat2Value": "50,000+",
       "stat2Label": "Active buyers",
       "stat3Value": "4.9/5",
-      "stat3Label": "Customer rating"
+      "stat3Label": "Customer rating",
+      "segResidential": "Residential",
+      "segCommercial": "Commercial",
+      "priceLabel": "Price"
     },
     "quickTypes": {
       "title": "Browse by type",
@@ -87,7 +90,8 @@
       "title1": "Premium",
       "title2": "Selection",
       "subtitle": "Exceptional properties carefully selected by our expert agents.",
-      "viewAll": "All listings"
+      "viewAll": "All listings",
+      "loadError": "Unable to load listings."
     },
     "stats": {
       "listings": "Published listings",
@@ -99,18 +103,46 @@
       "tag": "By destination",
       "title": "Browse by city",
       "subtitle": "Find your property in Morocco's major cities.",
-      "listings": "listings"
+      "listings": "listings",
+      "Casablanca": "Casablanca",
+      "Marrakech": "Marrakech",
+      "Rabat": "Rabat",
+      "Agadir": "Agadir",
+      "Tanger": "Tangier",
+      "Fès": "Fez"
     },
     "howItWorks": {
       "tag": "How it works",
+      "titleMain": "3 steps to find",
+      "titleHighlight": "your property",
       "title": "Simple, fast & secure",
       "subtitle": "Find your ideal property in three simple steps.",
       "step1Title": "Search",
-      "step1Desc": "Use our advanced filters to narrow your search among thousands of listings.",
-      "step2Title": "Visit",
-      "step2Desc": "Contact the agent directly to schedule a visit at your convenience.",
-      "step3Title": "Finalize",
-      "step3Desc": "Complete your transaction securely with the support of our experts."
+      "step1Desc": "Browse thousands of listings filtered by city, type and budget — in seconds.",
+      "step2Title": "Choose a property",
+      "step2Desc": "View photos, details and location. Contact our team directly.",
+      "step3Title": "Sign & Move In",
+      "step3Desc": "Our agents guide you all the way to signing. Simple, fast and secure."
+    },
+    "categories": {
+      "residentialTitle": "Residential",
+      "residentialSubtitle": "Apartments, villas, studios and land",
+      "commercialTitle": "Commercial",
+      "commercialSubtitle": "Offices, riads, commercial spaces and land",
+      "locaux": "Spaces"
+    },
+    "contactBanner": {
+      "tag": "Contact us",
+      "title1": "A real estate project?",
+      "title2": "Let's talk.",
+      "desc": "Our advisors are available 7 days a week to answer your questions, arrange visits and guide you through your project.",
+      "callBtn": "Call now",
+      "item1Title": "Verified agents",
+      "item1Desc": "All our advisors are certified and experienced.",
+      "item2Title": "Fast response",
+      "item2Desc": "We'll get back to you within 30 minutes during the day.",
+      "item3Title": "No commitment",
+      "item3Desc": "Free consultation, no commitment required."
     },
     "agents": {
       "tag": "Our experts",
@@ -276,7 +308,9 @@
     "subjectOther": "Other",
     "messageLabel": "Message *",
     "messagePlaceholder": "How can we help you?",
-    "sendBtn": "Send message"
+    "sendBtn": "Send message",
+    "errorGeneric": "An error occurred. Please try again.",
+    "errorNetwork": "Unable to reach the server. Check your connection."
   },
   "sell": {
     "heroBadge": "+12,000 active buyers are waiting",
