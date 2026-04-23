@@ -52,7 +52,7 @@ export default function Login() {
           </div>
           <h2 className="font-serif text-4xl font-bold text-white leading-tight">
             Bienvenue sur<br />
-            <span className="text-accent">ImmoMaroc</span>
+            <span className="text-accent">IMMO 21</span>
           </h2>
           <p className="text-white/50 text-base leading-relaxed max-w-sm">
             Gérez vos biens, suivez vos leads et développez votre activité immobilière depuis un seul espace.
@@ -61,7 +61,7 @@ export default function Login() {
 
         {/* Bottom */}
         <div className="relative z-10">
-          <p className="text-white/25 text-xs">© {new Date().getFullYear()} ImmoMaroc. Tous droits réservés.</p>
+          <p className="text-white/25 text-xs">© {new Date().getFullYear()} IMMO 21. Tous droits réservés.</p>
         </div>
       </div>
 

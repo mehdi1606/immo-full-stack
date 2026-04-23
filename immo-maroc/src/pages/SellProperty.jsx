@@ -282,7 +282,7 @@ export default function SellProperty() {
                 <h3 className="font-semibold mb-2 text-sm">{t('sell.helpTitle')}</h3>
                 <p className="text-white/70 text-xs mb-4 leading-relaxed">{t('sell.helpDesc')}</p>
                 <a href="tel:+2125222334455" className="flex items-center gap-2 bg-white text-primary font-semibold text-sm px-4 py-3 rounded-xl hover:bg-neutral-100 transition-colors w-full justify-center">
-                  <Phone size={15} /> +212 522 334 455
+                  <Phone size={15} /> +212 661 841 116
                 </a>
               </div>
 

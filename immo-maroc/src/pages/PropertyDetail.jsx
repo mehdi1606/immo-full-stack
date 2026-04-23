@@ -181,7 +181,7 @@ export default function PropertyDetail() {
             <div className="bg-white rounded-2xl overflow-hidden shadow-card">
               <div className="relative h-[240px] sm:h-[320px] md:h-[420px] group/img">
                 <img
-                  src={property.images[imgIdx] || 'https://placehold.co/800x500?text=ImmoMaroc'}
+                  src={property.images[imgIdx] || 'https://placehold.co/800x500?text=IMMO 21'}
                   alt={property.title}
                   onClick={() => setLightbox(true)}
                   className="w-full h-full object-cover cursor-zoom-in"
@@ -372,7 +372,7 @@ export default function PropertyDetail() {
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all">
                       <Phone size={15} /> {t('common.call')}
                     </a>
-                    <a href={`https://wa.me/${agent.whatsapp || agent.phone}?text=Bonjour, je suis intéressé(e) par votre annonce : ${property.title}`}
+                    <a href={`https://wa.me/${agent.whatsapp || agent.phone}?text=${encodeURIComponent(`Bonjour, je suis intéressé(e) par votre annonce : ${property.title}\n${window.location.href}`)}`}
                       target="_blank" rel="noreferrer"
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-500 text-white font-semibold text-sm hover:bg-emerald-600 transition-colors">
                       <MessageCircle size={15} /> {t('common.whatsapp')}

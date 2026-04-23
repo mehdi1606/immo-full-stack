@@ -1,5 +1,5 @@
 /**
- * Centralized HTTP client for ImmoMaroc API
+ * Centralized HTTP client for IMMO 21 API
  * Base URL : http://localhost:8090
  * Auth     : httpOnly cookie "immo_token" set by the server on login
  *            (credentials: 'include' sends it automatically on every request)

@@ -78,8 +78,8 @@ function SidebarContent({ onClose }) {
       <div className="flex items-center justify-between px-5 py-5 border-b border-white/5">
         <div>
           <div className="flex items-baseline gap-0.5">
-            <span className="text-white text-xl font-bold tracking-tight">Immo</span>
-            <span className="text-primary text-xl font-bold tracking-tight">Maroc</span>
+            <span className="text-white text-xl font-bold tracking-tight">IMMO</span>
+            <span className="text-accent text-xl font-bold tracking-tight"> 21</span>
           </div>
           <p className="text-gray-600 text-[10px] tracking-widest uppercase mt-0.5">Admin CPanel</p>
         </div>

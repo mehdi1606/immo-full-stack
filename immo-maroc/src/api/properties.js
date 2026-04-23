@@ -71,9 +71,9 @@ export function getExpiredListings() {
 
 /** Build absolute image URL from a relative path, full URL, or image object */
 export function getImageUrl(img) {
-  if (!img) return 'https://placehold.co/400x300?text=ImmoMaroc';
+  if (!img) return 'https://placehold.co/400x300?text=IMMO 21';
   if (typeof img === 'object') img = img.url || '';
-  if (!img) return 'https://placehold.co/400x300?text=ImmoMaroc';
+  if (!img) return 'https://placehold.co/400x300?text=IMMO 21';
   if (img.startsWith('http')) return img;
   // Backend returns relative paths like "/uploads/filename.jpg"
   // Use relative URL so Nginx serves it in Docker and Vite proxy handles it in dev

@@ -154,7 +154,7 @@
     "whyUs": {
       "tag": "Why us",
       "title1": "The",
-      "title2": "ImmoMaroc difference",
+      "title2": "IMMO 21 difference",
       "subtitle": "We've reimagined the real estate experience from A to Z to offer you a service that meets your expectations.",
       "item1Title": "Verified listings",
       "item1Desc": "Each listing is verified by our team to ensure the authenticity of information.",
@@ -384,7 +384,7 @@
     "callNow": "Call now",
     "submitAnother": "Submit another listing",
     "review": "4.9/5 – Owner reviews",
-    "reviewText": "I sold my apartment in 3 weeks thanks to ImmoMaroc. Professional service and serious buyers.",
+    "reviewText": "I sold my apartment in 3 weeks thanks to IMMO 21. Professional service and serious buyers.",
     "reviewer": "— Rachida M., Casablanca"
   },
   "login": {
@@ -606,7 +606,7 @@
     },
     "dashboard": {
       "title": "Admin dashboard",
-      "subtitle": "Overview of the ImmoMaroc platform",
+      "subtitle": "Overview of the IMMO 21 platform",
       "stat1": "Total listings",
       "stat2": "Active agents",
       "stat3": "Transactions",
@@ -650,7 +650,7 @@
     "linkAgent": "Agent space",
     "linkAdmin": "Admin space",
     "linkContact": "Contact us",
-    "copyright": "© {{year}} ImmoMaroc. All rights reserved."
+    "copyright": "© {{year}} IMMO 21. All rights reserved."
   },
   "notFound": {
     "title": "Page not found",

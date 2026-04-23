@@ -31,7 +31,7 @@ export default function AgentLayout() {
       <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 shrink-0">
         <Link to="/" className="flex items-center gap-2.5 text-white">
           <Building2 size={20} className="text-[#0D6EFD]" />
-          <span className="font-bold text-base tracking-tight">ImmoMaroc</span>
+          <span className="font-bold text-base tracking-tight">IMMO 21</span>
         </Link>
         {mobile && (
           <button onClick={() => setSidebarOpen(false)} className="p-1 text-white/40 hover:text-white transition-colors">

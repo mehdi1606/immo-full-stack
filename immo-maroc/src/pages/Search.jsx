@@ -194,7 +194,7 @@ export default function SearchPage() {
                   <div key={p.id} className="bg-white rounded-2xl shadow-sm border border-neutral-100 flex flex-col sm:flex-row overflow-hidden hover:shadow-md transition-shadow">
                     <div className="sm:w-52 h-48 sm:h-auto shrink-0 overflow-hidden">
                       <img
-                        src={p.images?.[0] || 'https://placehold.co/400x300?text=ImmoMaroc'}
+                        src={p.images?.[0] || 'https://placehold.co/400x300?text=IMMO 21'}
                         alt={p.title}
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                       />

@@ -47,8 +47,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/sell-requests").permitAll()
                 // Contact — public submit
                 .requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
-                // Static uploads
+                // Static uploads & images
                 .requestMatchers("/uploads/**").permitAll()
+                .requestMatchers("/img/**").permitAll()
                 // Translation — public read endpoints
                 .requestMatchers(HttpMethod.GET,  "/api/translate/languages").permitAll()
                 .requestMatchers(HttpMethod.GET,  "/api/translate/property/**").permitAll()

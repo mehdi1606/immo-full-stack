@@ -31,6 +31,9 @@ public class EmailServiceImpl implements IEmailService {
     @Value("${app.admin.email}")
     private String adminEmail;
 
+    @Value("${app.base-url:http://localhost:8090}")
+    private String baseUrl;
+
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     // ─────────────────────────────────────────────
@@ -78,7 +81,7 @@ public class EmailServiceImpl implements IEmailService {
 
             send(
                 req.getEmail(),
-                "ImmoMaroc — Votre demande a bien été reçue",
+                "IMMO 21 — Votre demande a bien été reçue",
                 body
             );
 
@@ -133,7 +136,7 @@ public class EmailServiceImpl implements IEmailService {
                     .replace("{{AGENT_EMAIL}}", email)
                     .replace("{{AGENT_PASSWORD}}", password);
 
-            send(email, "ImmoMaroc — Bienvenue ! Vos accès à l'espace agent", body);
+            send(email, "IMMO 21 — Bienvenue ! Vos accès à l'espace agent", body);
             log.info("Welcome email sent to agent: {}", email);
         } catch (Exception ex) {
             log.error("Failed to send welcome email to agent {}: {}", email, ex.getMessage());
@@ -157,7 +160,7 @@ public class EmailServiceImpl implements IEmailService {
 
             send(
                 adminEmail,
-                "ImmoMaroc — Nouveau message : " + msg.getSubject() + " | " + msg.getName(),
+                "IMMO 21 — Nouveau message : " + msg.getSubject() + " | " + msg.getName(),
                 body
             );
 
@@ -180,7 +183,7 @@ public class EmailServiceImpl implements IEmailService {
 
             send(
                 msg.getEmail(),
-                "ImmoMaroc — Votre message a bien été reçu",
+                "IMMO 21 — Votre message a bien été reçu",
                 body
             );
 
@@ -202,7 +205,7 @@ public class EmailServiceImpl implements IEmailService {
                     .replace("{{AGENT_EMAIL}}", email)
                     .replace("{{AGENT_PASSWORD}}", newPassword);
 
-            send(email, "ImmoMaroc — Votre mot de passe a été réinitialisé", body);
+            send(email, "IMMO 21 — Votre mot de passe a été réinitialisé", body);
             log.info("Password reset email sent to: {}", email);
         } catch (Exception ex) {
             log.error("Failed to send password reset email to {}: {}", email, ex.getMessage());
@@ -236,7 +239,7 @@ public class EmailServiceImpl implements IEmailService {
                     .replace("{{CHECK_DATE}}", java.time.LocalDateTime.now().format(DATE_FORMAT));
 
             send(adminEmail,
-                 "ImmoMaroc — " + expiredListings.size() + " annonce(s) expirée(s) à traiter",
+                 "IMMO 21 — " + expiredListings.size() + " annonce(s) expirée(s) à traiter",
                  body);
             log.info("Expired listings digest sent to admin ({} listings)", expiredListings.size());
         } catch (Exception ex) {
@@ -247,18 +250,25 @@ public class EmailServiceImpl implements IEmailService {
     // ─────────────────────────────────────────────
     //  Helpers
     // ─────────────────────────────────────────────
+    private static final ClassPathResource LOGO = new ClassPathResource("static/img/logo-navbar.webp");
+
     private String loadTemplate(String filename) throws IOException {
         ClassPathResource resource = new ClassPathResource("templates/email/" + filename);
-        String content = resource.getContentAsString(StandardCharsets.UTF_8);
-        return content.replace("{{YEAR}}", String.valueOf(java.time.Year.now().getValue()));
+        return resource.getContentAsString(StandardCharsets.UTF_8)
+            .replace("{{YEAR}}", String.valueOf(java.time.Year.now().getValue()))
+            .replace("{{LOGO_URL}}", "cid:logo");
     }
 
     private void send(String to, String subject, String htmlBody) throws Exception {
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        MimeMessageHelper helper = new MimeMessageHelper(
+            message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, "UTF-8");
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(htmlBody, true);
+        if (LOGO.exists()) {
+            helper.addInline("logo", LOGO, "image/webp");
+        }
         mailSender.send(message);
     }
 }

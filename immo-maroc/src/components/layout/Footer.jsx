@@ -29,26 +29,24 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
-                <Home size={17} className="text-white" />
-              </div>
-              <span className="font-bold text-xl">Immo<span className="text-accent">Maroc</span></span>
+            <Link to="/" className="flex items-center mb-5">
+                <img src="/img/logo.webp"  alt="Immo 21" className="h-13 w-auto" />
+            
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">{t('footer.tagline')}</p>
             <div className="space-y-3">
-              <a href="tel:+2125222334455" className="flex items-center gap-3 text-white/50 hover:text-accent text-sm transition-colors">
+              <a href="tel:+212 661 841 116" className="flex items-center gap-3 text-white/50 hover:text-accent text-sm transition-colors">
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0"><Phone size={13} /></div>
-                +212 522 334 455
+                +212 661 841 116
               </a>
-              <a href="mailto:contact@immomaroc.ma" className="flex items-center gap-3 text-white/50 hover:text-accent text-sm transition-colors">
+              <a href="mailto:immo.maroc.212@gmail.com" className="flex items-center gap-3 text-white/50 hover:text-accent text-sm transition-colors">
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0"><Mail size={13} /></div>
-                contact@immomaroc.ma
+                immo.maroc.212@gmail.com
               </a>
-              <p className="flex items-center gap-3 text-white/50 text-sm">
+              {/* <p className="flex items-center gap-3 text-white/50 text-sm">
                 <span className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0"><MapPin size={13} /></span>
                 Twin Center, Casablanca
-              </p>
+              </p> */}
             </div>
           </div>
 

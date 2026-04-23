@@ -82,7 +82,7 @@ export default function Navbar() {
   }, []);
 
   const handleLogout  = () => { logout(); navigate('/'); setUserMenu(false); };
-  const dashPath      = user?.role === 'admin' ? '/admin' : '/agent';
+  const dashPath      = user?.role?.toLowerCase() === 'admin' ? '/admin' : '/agent';
   const currentLang   = LANGUAGES.find(l => l.code === i18n.language) || LANGUAGES[0];
   const selectLang    = (code) => { i18n.changeLanguage(code); setLangOpen(false); };
 
@@ -107,6 +107,7 @@ export default function Navbar() {
     <>
       {/* ══ Floating pill wrapper ════════════════════════════════════ */}
       <div
+        dir="ltr"
         className={`fixed inset-x-0 z-50 flex justify-center transition-all duration-500 ${
           transparent ? 'top-4' : 'top-3'
         } ${hidden ? '-translate-y-[140%] opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
@@ -117,19 +118,12 @@ export default function Navbar() {
           <div className={`flex items-center gap-4 px-5 py-2.5 rounded-full transition-all duration-500 ${pillBg}`}>
 
             {/* ─── Logo ──────────────────────────────────────────── */}
-            <Link to="/" className="flex items-center gap-2 shrink-0 group mr-1">
-              <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
-                transparent
-                  ? 'bg-white/20 ring-1 ring-white/30 group-hover:bg-white/30'
-                  : 'bg-primary shadow-md group-hover:shadow-primary/30'
-              }`}>
-                <Building2 size={15} className="text-white" />
-              </div>
-              <span className={`font-bold text-[1.05rem] tracking-tight transition-colors duration-300 ${
-                transparent ? 'text-white' : isDark ? 'text-white' : 'text-neutral-900'
-              }`}>
-                Immo<span className="text-accent">Maroc</span>
-              </span>
+            <Link to="/" className="flex items-center shrink-0 mr-2">
+              <img
+                src="/img/logo.webp"
+                alt="Immo 21"
+                className="h-11 w-auto"
+              />
             </Link>
 
             {/* ─── Desktop nav links (center) ─────────────────── */}
@@ -204,11 +198,9 @@ export default function Navbar() {
                         : 'border-neutral-200 text-neutral-700 hover:bg-neutral-50'
                     }`}
                   >
-                    <img
-                      src={user.avatar}
-                      alt={user.name}
-                      className="w-7 h-7 rounded-full object-cover"
-                    />
+                    <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">
+                      {user.name?.charAt(0).toUpperCase()}
+                    </div>
                     <span className="hidden xl:inline max-w-[80px] truncate">{user.name.split(' ')[0]}</span>
                     <ChevronDown
                       size={13}
@@ -236,15 +228,27 @@ export default function Navbar() {
                         >
                           <LayoutDashboard size={14} /> {t('nav.dashboard')}
                         </Link>
-                        <Link
-                          to={`${dashPath}/profil`}
-                          onClick={() => setUserMenu(false)}
-                          className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-                            isDark ? 'text-slate-300 hover:bg-white/5 hover:text-white' : 'text-neutral-600 hover:bg-neutral-50 hover:text-primary'
-                          }`}
-                        >
-                          <User size={14} /> {t('nav.profile')}
-                        </Link>
+                        {user?.role?.toLowerCase() === 'admin' ? (
+                          <Link
+                            to="/admin/agents"
+                            onClick={() => setUserMenu(false)}
+                            className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                              isDark ? 'text-slate-300 hover:bg-white/5 hover:text-white' : 'text-neutral-600 hover:bg-neutral-50 hover:text-primary'
+                            }`}
+                          >
+                            <User size={14} /> Agents
+                          </Link>
+                        ) : (
+                          <Link
+                            to="/agent/profil"
+                            onClick={() => setUserMenu(false)}
+                            className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                              isDark ? 'text-slate-300 hover:bg-white/5 hover:text-white' : 'text-neutral-600 hover:bg-neutral-50 hover:text-primary'
+                            }`}
+                          >
+                            <User size={14} /> {t('nav.profile')}
+                          </Link>
+                        )}
                       </div>
                       <div className={`border-t ${isDark ? 'border-white/10' : 'border-neutral-100'}`}>
                         <button
@@ -306,13 +310,8 @@ export default function Navbar() {
 
           {/* Header */}
           <div className={`flex items-center justify-between px-5 py-5 border-b ${isDark ? 'border-white/10' : 'border-neutral-100'}`}>
-            <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-md">
-                <Building2 size={18} className="text-white" />
-              </div>
-              <span className={`font-bold text-xl ${isDark ? 'text-white' : 'text-neutral-900'}`}>
-                Immo<span className="text-accent">Maroc</span>
-              </span>
+            <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center">
+              <img src="/img/logo.webp" alt="Immo 21" className="h-12 w-auto" />
             </Link>
             <button
               onClick={() => setMobileOpen(false)}

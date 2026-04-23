@@ -154,7 +154,7 @@
     "whyUs": {
       "tag": "Pourquoi nous",
       "title1": "La différence",
-      "title2": "ImmoMaroc",
+      "title2": "IMMO 21",
       "subtitle": "Nous avons repensé l'expérience immobilière de A à Z pour vous offrir un service à la hauteur de vos attentes.",
       "item1Title": "Annonces vérifiées",
       "item1Desc": "Chaque annonce est vérifiée par notre équipe pour garantir l'authenticité des informations.",
@@ -384,7 +384,7 @@
     "callNow": "Appeler maintenant",
     "submitAnother": "Soumettre une autre annonce",
     "review": "4.9/5 – Avis de propriétaires",
-    "reviewText": "J'ai vendu mon appartement en 3 semaines grâce à ImmoMaroc. Service professionnel et acheteurs sérieux.",
+    "reviewText": "J'ai vendu mon appartement en 3 semaines grâce à IMMO 21. Service professionnel et acheteurs sérieux.",
     "reviewer": "— Rachida M., Casablanca"
   },
   "login": {
@@ -606,7 +606,7 @@
     },
     "dashboard": {
       "title": "Tableau de bord admin",
-      "subtitle": "Vue d'ensemble de la plateforme ImmoMaroc",
+      "subtitle": "Vue d'ensemble de la plateforme IMMO 21",
       "stat1": "Annonces totales",
       "stat2": "Agents actifs",
       "stat3": "Transactions",
@@ -650,7 +650,7 @@
     "linkAgent": "Espace agent",
     "linkAdmin": "Espace admin",
     "linkContact": "Nous contacter",
-    "copyright": "© {{year}} ImmoMaroc. Tous droits réservés."
+    "copyright": "© {{year}} IMMO 21. Tous droits réservés."
   },
   "notFound": {
     "title": "Page introuvable",

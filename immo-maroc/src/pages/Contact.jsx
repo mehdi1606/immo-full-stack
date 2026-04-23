@@ -50,9 +50,9 @@ export default function Contact() {
   };
 
   const contactItems = [
-    { icon: Phone,  title: t('contact.phone'),   lines: ['+212 522 334 455', '+212 522 334 456'], href: 'tel:+2125222334455' },
-    { icon: Mail,   title: t('contact.email'),   lines: ['contact@immomaroc.ma', 'support@immomaroc.ma'], href: 'mailto:contact@immomaroc.ma' },
-    { icon: MapPin, title: t('contact.address'), lines: ['Twin Center, Tour Ouest', 'Casablanca 20100'], href: '#' },
+    { icon: Phone,  title: t('contact.phone'),   lines: ['+212 661 841 116', ], href: 'tel:+212661841116' },
+    { icon: Mail,   title: t('contact.email'),   lines: ['immo.maroc.212@gmail.com', 'support@immomaroc.ma'], href: 'mailto:contact@immomaroc.ma' },
+    // { icon: MapPin, title: t('contact.address'), lines: ['Twin Center, Tour Ouest', 'Casablanca 20100'], href: '#' },
     { icon: Clock,  title: t('contact.hours'),   lines: [t('contact.hoursVal1'), t('contact.hoursVal2')], href: null },
   ];
 
