@@ -47,6 +47,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/sell-requests").permitAll()
                 // Contact — public submit
                 .requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
+                // OG / social-preview pages (must be public for WhatsApp crawler)
+                .requestMatchers(HttpMethod.GET, "/og/**").permitAll()
                 // Static uploads & images
                 .requestMatchers("/uploads/**").permitAll()
                 .requestMatchers("/img/**").permitAll()

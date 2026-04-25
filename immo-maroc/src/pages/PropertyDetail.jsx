@@ -29,6 +29,7 @@ export default function PropertyDetail() {
   const [sent, setSent]           = useState(false);
   const [sending, setSending]     = useState(false);
   const [copied, setCopied]       = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
 
   // Load property
   useEffect(() => {
@@ -111,22 +112,14 @@ export default function PropertyDetail() {
     }
   };
 
-  const handleShare = async () => {
-    const shareUrl = window.location.href;
-    const shareData = {
-      title: property?.title,
-      text: `${property?.title} — ${formatPrice(property?.price, property?.purpose, property?.subPurpose)} · ${property?.city}`,
-      url: shareUrl,
-    };
+  const handleShare = () => setShareOpen(v => !v);
+
+  const handleCopyLink = async () => {
     try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(shareUrl);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2500);
-      }
-    } catch { /* user cancelled */ }
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => { setCopied(false); setShareOpen(false); }, 2200);
+    } catch { /* denied */ }
   };
 
   const TABS = [
@@ -213,15 +206,50 @@ export default function PropertyDetail() {
                 <div className="absolute top-4 right-4">
                   <button
                     onClick={handleShare}
-                    className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 ${copied ? 'bg-emerald-500 text-white scale-110' : 'bg-white/90 text-neutral-400 hover:text-primary'}`}
+                    className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-neutral-500 hover:text-primary hover:bg-white transition-all shadow-sm"
                     title="Partager"
                   >
-                    {copied ? <Check size={15} /> : <Share2 size={15} />}
+                    <Share2 size={15} />
                   </button>
-                  {copied && (
-                    <div className="absolute right-0 top-full mt-2 bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap shadow-lg flex items-center gap-1.5">
-                      <Link2 size={11} /> Lien copié !
-                    </div>
+                  {shareOpen && (
+                    <>
+                      {/* backdrop to close */}
+                      <div className="fixed inset-0 z-40" onClick={() => setShareOpen(false)} />
+                      <div className="absolute right-0 top-full mt-2 bg-white rounded-2xl shadow-2xl border border-neutral-100 p-2 z-50 w-52">
+                        <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wide px-3 py-1.5">
+                          Partager l'annonce
+                        </p>
+                        {/* WhatsApp */}
+                        <a
+                          href={`https://wa.me/?text=${encodeURIComponent(`Je vous partage cette annonce: ${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:8090')}/og/property/${property.id}`)}`}
+                          target="_blank" rel="noreferrer"
+                          onClick={() => setShareOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-600 transition-colors text-sm font-medium"
+                        >
+                          <MessageCircle size={16} /> WhatsApp
+                        </a>
+                        {/* Facebook */}
+                        <a
+                          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:8090')}/og/property/${property.id}`)}`}
+                          target="_blank" rel="noreferrer"
+                          onClick={() => setShareOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50 text-blue-600 transition-colors text-sm font-medium"
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                          Facebook
+                        </a>
+                        {/* Copy link */}
+                        <button
+                          onClick={handleCopyLink}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-neutral-50 transition-colors text-sm font-medium text-neutral-700"
+                        >
+                          {copied
+                            ? <><Check size={16} className="text-emerald-500" /><span className="text-emerald-600">Lien copié !</span></>
+                            : <><Link2 size={16} /> Copier le lien</>
+                          }
+                        </button>
+                      </div>
+                    </>
                   )}
                 </div>
                 {/* nav */}
@@ -372,7 +400,7 @@ export default function PropertyDetail() {
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all">
                       <Phone size={15} /> {t('common.call')}
                     </a>
-                    <a href={`https://wa.me/${agent.whatsapp || agent.phone}?text=${encodeURIComponent(`Bonjour, je suis intéressé(e) par votre annonce : ${property.title}\n${window.location.href}`)}`}
+                    <a href={`https://wa.me/${(agent.whatsapp || agent.phone || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Je vous contacte à propos de cette annonce: ${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:8090')}/og/property/${property.id}`)}`}
                       target="_blank" rel="noreferrer"
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-500 text-white font-semibold text-sm hover:bg-emerald-600 transition-colors">
                       <MessageCircle size={15} /> {t('common.whatsapp')}

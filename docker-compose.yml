@@ -59,6 +59,10 @@ services:
       # CORS — must match your real domain in production
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
 
+      # Public URLs (used by OG / social preview endpoint)
+      APP_BASE_URL:   http://51.103.213.190
+      FRONTEND_URL:   http://51.103.213.190
+
       # Admin
       ADMIN_EMAIL: ${ADMIN_EMAIL}
 
