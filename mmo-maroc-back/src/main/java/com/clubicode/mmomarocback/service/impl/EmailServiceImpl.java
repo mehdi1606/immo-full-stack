@@ -34,6 +34,9 @@ public class EmailServiceImpl implements IEmailService {
     @Value("${app.base-url:http://localhost:8090}")
     private String baseUrl;
 
+    @Value("${app.frontend-url:http://localhost:5173}")
+    private String frontendUrl;
+
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     // ─────────────────────────────────────────────
@@ -256,7 +259,8 @@ public class EmailServiceImpl implements IEmailService {
         ClassPathResource resource = new ClassPathResource("templates/email/" + filename);
         return resource.getContentAsString(StandardCharsets.UTF_8)
             .replace("{{YEAR}}", String.valueOf(java.time.Year.now().getValue()))
-            .replace("{{LOGO_URL}}", "cid:logo");
+            .replace("{{LOGO_URL}}", "cid:logo")
+            .replace("{{LOGIN_URL}}", frontendUrl + "/connexion");
     }
 
     private void send(String to, String subject, String htmlBody) throws Exception {

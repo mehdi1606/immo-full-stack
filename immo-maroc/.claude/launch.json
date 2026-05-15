@@ -1,1 +1,1 @@
-{"version":"0.0.1","configurations":[{"name":"immo-maroc","runtimeExecutable":"node","runtimeArgs":["node_modules/vite/bin/vite.js"],"port":5173,"autoPort":true}]}
+{"version":"0.0.1","configurations":[{"name":"immo-maroc","runtimeExecutable":"npm","runtimeArgs":["run","dev","--","--host"],"cwd":"C:\\Users\\PC\\immo-maroc-project\\immo-maroc","port":5173,"autoPort":true}]}

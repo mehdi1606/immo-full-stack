@@ -4,6 +4,7 @@ import { X, ChevronDown, LogOut, LayoutDashboard, User, Building2 } from 'lucide
 import { useTranslation } from 'react-i18next';
 import { useApp } from '../../context/AppContext';
 import { useTheme } from '../../hooks/useTheme.jsx';
+import ThemeToggle from '../common/ThemeToggle.jsx';
 
 /* ─── Languages ──────────────────────────────────────────────── */
 const LANGUAGES = [
@@ -141,6 +142,9 @@ export default function Navbar() {
 
             {/* ─── Right controls ─────────────────────────────── */}
             <div className="hidden lg:flex items-center gap-2 shrink-0 ml-1">
+
+              {/* ── Theme toggle ── */}
+              <ThemeToggle />
 
               {/* ── Flag language dropdown ── */}
               <div className="relative" ref={langRef}>
@@ -375,6 +379,16 @@ export default function Navbar() {
 
           {/* Bottom controls */}
           <div className={`px-5 py-5 border-t space-y-4 ${isDark ? 'border-white/10' : 'border-neutral-100'}`}>
+            {/* Theme toggle row */}
+            <div className={`flex items-center justify-between px-5 py-4 rounded-2xl ${
+              isDark ? 'bg-white/5' : 'bg-neutral-50'
+            }`}>
+              <span className={`text-base font-semibold ${isDark ? 'text-slate-300' : 'text-neutral-700'}`}>
+                {isDark ? '🌙 Mode sombre' : '☀️ Mode clair'}
+              </span>
+              <ThemeToggle />
+            </div>
+
             {/* Language dropdown */}
             <div>
               <button

@@ -221,7 +221,14 @@ export default function PropertyDetail() {
                         </p>
                         {/* WhatsApp */}
                         <a
-                          href={`https://wa.me/?text=${encodeURIComponent(`Je vous partage cette annonce: ${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:8090')}/og/property/${property.id}`)}`}
+                          href={`https://wa.me/?text=${encodeURIComponent(
+                            `*${property.title}*\n` +
+                            `Ville : ${[property.neighborhood, property.city].filter(Boolean).join(', ')}\n` +
+                            `Prix : ${formatPrice(property.price, property.purpose, property.subPurpose)}\n` +
+                            (property.area ? `Surface : ${property.area} m2` : '') +
+                            (property.rooms ? ` - ${property.rooms} chambre${property.rooms > 1 ? 's' : ''}` : '') + '\n' +
+                            `\nVoir l\'annonce : ${window.location.href}`
+                          )}`}
                           target="_blank" rel="noreferrer"
                           onClick={() => setShareOpen(false)}
                           className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 text-emerald-600 transition-colors text-sm font-medium"
@@ -230,7 +237,7 @@ export default function PropertyDetail() {
                         </a>
                         {/* Facebook */}
                         <a
-                          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:8090')}/og/property/${property.id}`)}`}
+                          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
                           target="_blank" rel="noreferrer"
                           onClick={() => setShareOpen(false)}
                           className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50 text-blue-600 transition-colors text-sm font-medium"
@@ -400,7 +407,19 @@ export default function PropertyDetail() {
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all">
                       <Phone size={15} /> {t('common.call')}
                     </a>
-                    <a href={`https://wa.me/${(agent.whatsapp || agent.phone || '').replace(/\D/g, '')}?text=${encodeURIComponent(`Je vous contacte à propos de cette annonce: ${(import.meta.env.VITE_BACKEND_URL || 'http://localhost:8090')}/og/property/${property.id}`)}`}
+                    <a href={`https://wa.me/${(agent.whatsapp || agent.phone || '').replace(/\D/g, '')}?text=${encodeURIComponent(
+                        `Bonjour, je vous contacte au sujet de cette annonce :\n\n` +
+                        `*${property.title}*\n` +
+                        `Ville : ${[property.neighborhood, property.city].filter(Boolean).join(', ')}\n` +
+                        `Type : ${property.type} - ${property.purpose === 'LOCATION' ? 'Location' : 'Vente'}\n` +
+                        `Prix : ${formatPrice(property.price, property.purpose, property.subPurpose)}\n` +
+                        `Surface : ${[
+                          property.area ? `${property.area} m2` : null,
+                          property.rooms ? `${property.rooms} chambre${property.rooms > 1 ? 's' : ''}` : null,
+                          property.bathrooms ? `${property.bathrooms} salle${property.bathrooms > 1 ? 's' : ''} de bain` : null,
+                        ].filter(Boolean).join(' - ')}\n` +
+                        `\nVoir l\'annonce : ${window.location.href}`
+                      )}`}
                       target="_blank" rel="noreferrer"
                       className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-500 text-white font-semibold text-sm hover:bg-emerald-600 transition-colors">
                       <MessageCircle size={15} /> {t('common.whatsapp')}

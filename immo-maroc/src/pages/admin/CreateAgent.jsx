@@ -136,12 +136,12 @@ export default function CreateAgent() {
 
   if (done) return (
     <div className="p-8 flex flex-col items-center justify-center min-h-[60vh]">
-      <div className="bg-white rounded-3xl shadow-card p-12 text-center max-w-md w-full">
-        <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 size={40} className="text-emerald-500" />
+      <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-card dark:border dark:border-slate-800 p-12 text-center max-w-md w-full">
+        <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle2 size={40} className="text-emerald-500 dark:text-emerald-400" />
         </div>
-        <h2 className="font-serif text-2xl font-bold text-neutral-900 mb-2">{t('admin.createAgent.successTitle')}</h2>
-        <p className="text-neutral-500 text-sm mb-8">{t('admin.createAgent.successMsg')}</p>
+        <h2 className="font-serif text-2xl font-bold text-neutral-900 dark:text-white mb-2">{t('admin.createAgent.successTitle')}</h2>
+        <p className="text-neutral-500 dark:text-slate-400 text-sm mb-8">{t('admin.createAgent.successMsg')}</p>
         <div className="flex gap-3">
           <button onClick={resetForm} className="flex-1 btn-outline justify-center text-sm">
             {t('admin.createAgent.createAnother')}
@@ -168,23 +168,23 @@ export default function CreateAgent() {
       </div>
 
       {saveError && (
-        <div className="bg-red-50 text-red-700 rounded-xl px-4 py-3 text-sm">{saveError}</div>
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 rounded-xl px-4 py-3 text-sm">{saveError}</div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-card p-4 sm:p-8">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-card dark:border dark:border-slate-800 p-4 sm:p-8">
         <form onSubmit={handleSubmit} className="space-y-5">
 
           {/* ── Role toggle ───────────────────────────────────────────────── */}
           <div className="form-group">
             <label className="form-label">Rôle du compte</label>
-            <div className="flex gap-2 p-1 bg-neutral-100 rounded-xl w-fit">
+            <div className="flex gap-2 p-1 bg-neutral-100 dark:bg-slate-800 rounded-xl w-fit">
               <button
                 type="button"
                 onClick={() => setRole('AGENT')}
                 className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all ${
                   role === 'AGENT'
-                    ? 'bg-white text-primary shadow-sm'
-                    : 'text-neutral-500 hover:text-neutral-700'
+                    ? 'bg-white dark:bg-slate-700 text-primary shadow-sm'
+                    : 'text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
                 }`}
               >
                 <UserIcon size={15} />
@@ -195,8 +195,8 @@ export default function CreateAgent() {
                 onClick={() => setRole('ADMIN')}
                 className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all ${
                   role === 'ADMIN'
-                    ? 'bg-white text-amber-600 shadow-sm'
-                    : 'text-neutral-500 hover:text-neutral-700'
+                    ? 'bg-white dark:bg-slate-700 text-amber-600 shadow-sm'
+                    : 'text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
                 }`}
               >
                 <Shield size={15} />
@@ -204,7 +204,7 @@ export default function CreateAgent() {
               </button>
             </div>
             {role === 'ADMIN' && (
-              <p className="mt-2 text-xs text-amber-600 flex items-center gap-1.5">
+              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
                 <Shield size={12} />
                 Ce compte aura accès complet au panneau d'administration.
               </p>
@@ -216,7 +216,7 @@ export default function CreateAgent() {
             <label className="form-label">{t('admin.createAgent.avatarLabel')}</label>
             <div className="flex items-center gap-4">
               {/* Preview circle */}
-              <div className="w-20 h-20 rounded-full bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center shrink-0 overflow-hidden relative">
+              <div className="w-20 h-20 rounded-full bg-neutral-100 dark:bg-slate-800 border-2 border-dashed border-neutral-300 dark:border-slate-600 flex items-center justify-center shrink-0 overflow-hidden relative">
                 {circlePreview ? (
                   <>
                     <img src={circlePreview} alt="" className="w-full h-full object-cover" />
@@ -248,7 +248,7 @@ export default function CreateAgent() {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 px-4 py-2 border border-neutral-300 rounded-xl text-sm text-neutral-600 hover:bg-neutral-50 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-slate-600 rounded-xl text-sm text-neutral-600 dark:text-slate-400 hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors"
                 >
                   <Upload size={14} /> Choisir une photo
                 </button>
@@ -306,7 +306,7 @@ export default function CreateAgent() {
           </div>
 
           {/* ── Info banner ───────────────────────────────────────────────── */}
-          <div className="flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-sm text-blue-700">
+          <div className="flex items-start gap-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl px-4 py-3 text-sm text-blue-700 dark:text-blue-300">
             <span className="mt-0.5">🔐</span>
             <span>
               Un mot de passe temporaire sera généré automatiquement et envoyé par email à l'agent.

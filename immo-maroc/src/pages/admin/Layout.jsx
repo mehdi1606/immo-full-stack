@@ -18,6 +18,8 @@ import { useApp } from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
 import { getAvatarUrl } from '../../api/properties';
 import NotificationBell from '../../components/NotificationBell';
+import ThemeToggle from '../../components/common/ThemeToggle.jsx';
+import { useTheme } from '../../hooks/useTheme.jsx';
 
 const NAV_SECTIONS = [
   {
@@ -204,6 +206,7 @@ export default function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useApp();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
 
   const pageName =
     typeof window !== 'undefined'
@@ -211,7 +214,7 @@ export default function AdminLayout() {
       : 'Admin';
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
+    <div className={`flex h-screen overflow-hidden ${isDark ? 'bg-slate-950' : 'bg-gray-50'}`}>
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex lg:flex-col w-64 flex-shrink-0 h-screen sticky top-0">
         <SidebarContent />
@@ -243,7 +246,9 @@ export default function AdminLayout() {
       {/* Main content area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* ── Top header ── */}
-        <header className="bg-white shadow-sm h-16 flex items-center px-6 flex-shrink-0 border-b border-neutral-100 z-10">
+        <header className={`h-16 flex items-center px-6 flex-shrink-0 border-b z-10 shadow-sm ${
+          isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-neutral-100'
+        }`}>
           {/* Left */}
           <div className="flex items-center gap-3 flex-1">
             <button
@@ -253,19 +258,21 @@ export default function AdminLayout() {
               <Menu size={22} />
             </button>
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-gray-400">Admin</span>
-              <ChevronRight size={14} className="text-gray-300" />
-              <span className="text-gray-800 font-semibold">{pageName}</span>
+              <span className={isDark ? 'text-slate-500' : 'text-gray-400'}>Admin</span>
+              <ChevronRight size={14} className={isDark ? 'text-slate-600' : 'text-gray-300'} />
+              <span className={`font-semibold ${isDark ? 'text-slate-100' : 'text-gray-800'}`}>{pageName}</span>
             </div>
           </div>
 
           {/* Right */}
           <div className="flex items-center gap-3">
+            <ThemeToggle />
+
             {/* Live notification bell */}
             <NotificationBell />
 
             {/* User avatar */}
-            <div className="flex items-center gap-2.5 pl-3 border-l border-gray-100">
+            <div className={`flex items-center gap-2.5 pl-3 border-l ${isDark ? 'border-white/10' : 'border-gray-100'}`}>
               <img
                 src={
                   user?.avatar
@@ -276,10 +283,10 @@ export default function AdminLayout() {
                 className="w-8 h-8 rounded-full object-cover ring-2 ring-gray-100"
               />
               <div className="hidden sm:block">
-                <p className="text-sm font-semibold text-gray-800 leading-none">
+                <p className={`text-sm font-semibold leading-none ${isDark ? 'text-slate-100' : 'text-gray-800'}`}>
                   {user?.name || 'Admin'}
                 </p>
-                <p className="text-xs text-gray-400 mt-0.5">{user?.role || 'Administrateur'}</p>
+                <p className={`text-xs mt-0.5 ${isDark ? 'text-slate-500' : 'text-gray-400'}`}>{user?.role || 'Administrateur'}</p>
               </div>
             </div>
           </div>

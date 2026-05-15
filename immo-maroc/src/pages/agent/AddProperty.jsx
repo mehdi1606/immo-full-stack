@@ -208,13 +208,13 @@ export default function AddProperty() {
     return (
       <div className="p-6 flex items-center justify-center min-h-[60vh]">
         <div className="text-center max-w-sm">
-          <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle2 size={32} className="text-emerald-600" />
+          <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle2 size={32} className="text-emerald-600 dark:text-emerald-400" />
           </div>
-          <h2 className="font-serif text-2xl font-bold text-neutral-900 mb-2">
+          <h2 className="font-serif text-2xl font-bold text-neutral-900 dark:text-white mb-2">
             {id ? t('agent.addProperty.updatedTitle') : t('agent.addProperty.publishedTitle')}
           </h2>
-          <p className="text-neutral-500 text-sm">{t('agent.addProperty.redirecting')}</p>
+          <p className="text-neutral-500 dark:text-slate-400 text-sm">{t('agent.addProperty.redirecting')}</p>
         </div>
       </div>
     );
@@ -240,24 +240,24 @@ export default function AddProperty() {
           <div key={sId} className="flex items-center gap-2 flex-1 min-w-0">
             <button
               onClick={() => step > sId && setStep(sId)}
-              className={`flex items-center gap-2 shrink-0 transition-colors ${step === sId ? 'text-primary' : step > sId ? 'text-emerald-600 cursor-pointer' : 'text-neutral-300'}`}
+              className={`flex items-center gap-2 shrink-0 transition-colors ${step === sId ? 'text-primary' : step > sId ? 'text-emerald-600 cursor-pointer' : 'text-neutral-300 dark:text-slate-600'}`}
             >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold ${step === sId ? 'bg-primary text-white' : step > sId ? 'bg-emerald-100 text-emerald-600' : 'bg-neutral-100 text-neutral-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold ${step === sId ? 'bg-primary text-white' : step > sId ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'bg-neutral-100 dark:bg-slate-800 text-neutral-400 dark:text-slate-600'}`}>
                 {step > sId ? <CheckCircle2 size={14} /> : sId}
               </div>
               <span className="hidden sm:inline text-xs font-medium">{label}</span>
             </button>
-            {i < STEPS.length - 1 && <div className={`flex-1 h-0.5 ${step > sId ? 'bg-emerald-300' : 'bg-neutral-200'}`} />}
+            {i < STEPS.length - 1 && <div className={`flex-1 h-0.5 ${step > sId ? 'bg-emerald-300 dark:bg-emerald-800' : 'bg-neutral-200 dark:bg-slate-700'}`} />}
           </div>
         ))}
       </div>
 
       {submitError && (
-        <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm">{submitError}</div>
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 rounded-xl px-4 py-3 text-sm">{submitError}</div>
       )}
 
       {/* Form card */}
-      <div className="bg-white rounded-2xl shadow-card p-6 space-y-5">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-card dark:border dark:border-slate-800 p-6 space-y-5">
         {/* Step 1: Basic info */}
         {step === 1 && (
           <>
@@ -278,11 +278,11 @@ export default function AddProperty() {
               </div>
               <div className="form-group">
                 <label className="form-label">{t('agent.addProperty.transactionLabel')}</label>
-                <div className="flex rounded-xl border border-neutral-200 overflow-hidden mb-2">
+                <div className="flex rounded-xl border border-neutral-200 dark:border-slate-700 overflow-hidden mb-2">
                   {BACKEND_PURPOSES.map(p => (
                     <button key={p} type="button"
                       onClick={() => { set('purpose', p); set('subPurpose', p === 'VENTE' ? 'NEUF' : 'COURT_TERME'); }}
-                      className={`flex-1 py-2.5 text-sm font-medium transition-colors ${form.purpose === p ? 'bg-primary text-white' : 'bg-white text-neutral-500 hover:bg-neutral-50'}`}>
+                      className={`flex-1 py-2.5 text-sm font-medium transition-colors ${form.purpose === p ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 text-neutral-500 dark:text-slate-400 hover:bg-neutral-50 dark:hover:bg-slate-700'}`}>
                       {t(`common.purpose.${p}`, p)}
                     </button>
                   ))}
@@ -295,7 +295,7 @@ export default function AddProperty() {
                       className={`flex-1 py-2 text-xs font-semibold rounded-lg border transition-colors ${
                         form.subPurpose === value
                           ? 'bg-primary/10 border-primary text-primary'
-                          : 'bg-white border-neutral-200 text-neutral-500 hover:border-neutral-300'
+                          : 'bg-white dark:bg-slate-800 border-neutral-200 dark:border-slate-700 text-neutral-500 dark:text-slate-400 hover:border-neutral-300 dark:hover:border-slate-600'
                       }`}>
                       {label}
                     </button>
@@ -371,7 +371,7 @@ export default function AddProperty() {
                 {FEATURES_LIST.map(f => (
                   <button key={f} type="button" onClick={() => toggleFeature(f)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-                      form.features.includes(f) ? 'bg-primary/10 border-primary/30 text-primary' : 'bg-white border-neutral-200 text-neutral-600 hover:border-neutral-300'
+                      form.features.includes(f) ? 'bg-primary/10 border-primary/30 text-primary' : 'bg-white dark:bg-slate-800 border-neutral-200 dark:border-slate-700 text-neutral-600 dark:text-slate-400 hover:border-neutral-300 dark:hover:border-slate-600'
                     }`}>
                     {f}
                   </button>
@@ -410,7 +410,7 @@ export default function AddProperty() {
               onDragLeave={() => setDragging(false)}
               onDrop={onDrop}
               onClick={() => fileInputRef.current?.click()}
-              className={`border-2 border-dashed rounded-2xl p-5 sm:p-8 text-center cursor-pointer transition-all ${dragging ? 'border-primary bg-primary/5 scale-[1.01]' : 'border-neutral-200 hover:border-primary hover:bg-neutral-50'}`}
+              className={`border-2 border-dashed rounded-2xl p-5 sm:p-8 text-center cursor-pointer transition-all ${dragging ? 'border-primary bg-primary/5 scale-[1.01]' : 'border-neutral-200 dark:border-slate-700 hover:border-primary hover:bg-neutral-50 dark:hover:bg-slate-800'}`}
             >
               <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <Upload size={24} className="text-primary" />

@@ -140,15 +140,15 @@ export default function EditAgent() {
       </div>
 
       {saved && (
-        <div className="bg-emerald-50 text-emerald-700 rounded-xl px-4 py-3 text-sm flex items-center gap-2">
+        <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 rounded-xl px-4 py-3 text-sm flex items-center gap-2">
           <CheckCircle2 size={15} /> {t('agent.profile.saved')}
         </div>
       )}
       {saveError && (
-        <div className="bg-red-50 text-red-700 rounded-xl px-4 py-3 text-sm">{saveError}</div>
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 rounded-xl px-4 py-3 text-sm">{saveError}</div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-card p-4 sm:p-8">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-card dark:border dark:border-slate-800 p-4 sm:p-8">
         <form onSubmit={handleSubmit} className="space-y-5">
 
           {/* ── Avatar section ──────────────────────────────────────────────── */}
@@ -158,7 +158,7 @@ export default function EditAgent() {
 
               {/* Preview circle */}
               <div className="relative w-20 h-20 shrink-0">
-                <div className="w-20 h-20 rounded-full bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center overflow-hidden">
+                <div className="w-20 h-20 rounded-full bg-neutral-100 dark:bg-slate-800 border-2 border-dashed border-neutral-300 dark:border-slate-600 flex items-center justify-center overflow-hidden">
                   {currentAvatarSrc ? (
                     <img src={currentAvatarSrc} alt="" className="w-full h-full object-cover" />
                   ) : (
@@ -190,7 +190,7 @@ export default function EditAgent() {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 px-4 py-2 border border-neutral-300 rounded-xl text-sm text-neutral-600 hover:bg-neutral-50 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 border border-neutral-300 dark:border-slate-600 rounded-xl text-sm text-neutral-600 dark:text-slate-400 hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors"
                 >
                   <Upload size={14} />
                   {currentAvatarSrc ? 'Changer la photo' : 'Choisir une photo'}

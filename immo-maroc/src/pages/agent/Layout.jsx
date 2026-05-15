@@ -8,6 +8,8 @@ import NotificationBell from '../../components/NotificationBell';
 import { useApp } from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
 import { getAvatarUrl } from '../../api/properties';
+import ThemeToggle from '../../components/common/ThemeToggle.jsx';
+import { useTheme } from '../../hooks/useTheme.jsx';
 
 const navLinkClass = ({ isActive }) =>
   `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
@@ -21,6 +23,7 @@ export default function AgentLayout() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { isDark } = useTheme();
 
   const handleLogout = () => { logout(); navigate('/connexion'); };
 
@@ -117,7 +120,7 @@ export default function AgentLayout() {
   );
 
   return (
-    <div className="flex h-screen bg-neutral-100 overflow-hidden">
+    <div className={`flex h-screen overflow-hidden ${isDark ? 'bg-slate-950' : 'bg-neutral-100'}`}>
 
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex w-60 flex-col shrink-0">
@@ -147,7 +150,9 @@ export default function AgentLayout() {
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
 
         {/* Topbar */}
-        <header className="bg-white border-b border-neutral-200 px-4 lg:px-6 py-3 flex items-center justify-between shrink-0">
+        <header className={`border-b px-4 lg:px-6 py-3 flex items-center justify-between shrink-0 ${
+          isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-neutral-200'
+        }`}>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -155,11 +160,12 @@ export default function AgentLayout() {
             >
               <Menu size={20} />
             </button>
-            <nav className="hidden sm:flex items-center gap-1.5 text-sm text-neutral-500">
-              <span className="font-medium text-neutral-800">Espace Agent</span>
+            <nav className="hidden sm:flex items-center gap-1.5 text-sm">
+              <span className={`font-medium ${isDark ? 'text-slate-100' : 'text-neutral-800'}`}>Espace Agent</span>
             </nav>
           </div>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <NotificationBell />
             <Link to="/agent/profil" className="flex items-center gap-2 pl-1">
               <img

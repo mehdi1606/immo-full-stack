@@ -222,6 +222,15 @@
 .dark [class*="bg-white rounded-2xl shadow"] { background-color: #1e293b; }
 .dark [class*="bg-neutral-50 rounded"] { background-color: #0f172a; }
 
+/* ── Additional backgrounds ───────────── */
+.dark .bg-neutral-200 { background-color: #334155 !important; }
+.dark .bg-gray-50     { background-color: #0f172a !important; }
+
+/* ── Hover states (form buttons, dropzones) ── */
+.dark .hover\:bg-neutral-50:hover  { background-color: #1e293b !important; }
+.dark .hover\:bg-neutral-100:hover { background-color: #334155 !important; }
+.dark .hover\:bg-neutral-200:hover { background-color: #334155 !important; }
+
 /* ── Dividers ─────────────────────────── */
 .dark .divide-x > * { border-color: #334155 !important; }
 .dark .border-t { border-color: #334155 !important; }
