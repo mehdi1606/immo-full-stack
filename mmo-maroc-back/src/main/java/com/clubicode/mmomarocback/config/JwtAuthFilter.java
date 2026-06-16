@@ -58,6 +58,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 }
             } catch (JwtException | IllegalArgumentException ex) {
                 log.warn("Invalid JWT token: {}", ex.getMessage());
+            } catch (org.springframework.security.core.userdetails.UsernameNotFoundException ex) {
+                log.warn("JWT references deleted user '{}' — treating as unauthenticated", ex.getMessage());
             }
         }
 
